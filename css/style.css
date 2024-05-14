@@ -75,3 +75,312 @@ body {
 .btn:hover {
     background-color: #0056b3;
 }
+
+#forgottenPwdLink{
+    width:fit-content;
+    padding:0.1em;
+}
+
+#newUserLink{
+    width: fit-content;
+    padding:0.1em;
+}
+
+#forgottenPwdLink:hover{
+    cursor:pointer;
+    background: #007bff;
+}
+
+#newUserLink:hover{
+    cursor: pointer;
+    background:#007bff;
+}
+
+/* Forgotten Pwd */
+
+.forgotten-pwd-page{
+    margin-top:2em;
+    width:50%;
+    margin-left:25%;
+    padding:0.5em;
+}
+
+#back-btn{
+    margin-left:-20%;
+    width:fit-content;
+}
+#back-btn:hover{
+    background: #007bff;
+    cursor:pointer;
+}
+
+/* New User*/
+
+.new-user-page{
+    margin-top:2em;
+    width:50%;
+    margin-left:25%;
+    padding:0.5em;
+}
+
+#back-btn{
+    margin-left:-20%;
+    width:fit-content;
+}
+#back-btn:hover{
+    background: #007bff;
+    cursor:pointer;
+}
+
+/* ############### CSS FROM OLD ASSIGNMENT ########## */
+/* Main page */
+a{
+	color: inherit; 
+	text-decoration: inherit;
+}
+
+.header{
+	display: flex;
+	justify-content: center;
+	height:33vh;
+	padding-top:12%;
+	width:100%;
+	justify-self: center;
+	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),  url(../assets/imgs/hero-img.jpg);
+	background-position: center;
+	background-size: cover;
+	color:white;
+	font-size: xx-large;
+	letter-spacing: 0.03rem;
+}
+/* Footer on main page */
+.footer{
+	width: 90%;
+	background: #9FA8A3;
+	height: 13vh;
+	margin-top:40px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.footer-container{
+	margin-top:30px;
+	font-weight: 600;
+	color:white;
+}
+
+.footer-link:hover{
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+/* Home button in the hotels, restaurants and cafees pages */
+.home-btn{
+	margin-left: 2rem;
+}
+.home-btn:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/* Styling of filter menu */
+.filter-and-options-container{
+	display: flex;
+	flex-direction: row;
+
+}
+.filtermenu{
+	background: #9FA8A3;
+	min-width: 20%;
+	padding: 0.4rem;
+	height: 95vh;
+}
+
+.filter-title{
+	font-weight: bold;
+}
+
+/* Main options container for the front page */
+.main-options-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	padding-top: 3%;
+}
+
+/* Secondary options container for restuarants, cafees and hotels pages */
+.secondary-options-container{
+	margin:2rem;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+  	gap: 20px;
+	z-index:1;
+}
+
+.secondary-options-container .option-box{
+	width:100%;
+	min-height: 45vh;
+	
+}
+
+.secondary-options-container .option-box h2{
+	font-size: x-large;
+	font-weight: bolder;
+	text-decoration: none;
+}
+
+/* Option Box styling */
+.option-box{
+	padding:0.2rem;
+	border-radius: 0.5rem;
+	background:whitesmoke;
+	box-shadow: 10px 5px 5px rgba(0,0,0,0.2);
+	width:30%;
+	height:35vh;
+	transition: all .2s ease-in-out; 
+}
+
+.option-box h2{
+	font-weight: 300;
+	font-size: large;
+	margin: 0.2rem;
+}
+
+.option-box p{
+	margin: 0.2rem;
+	font-weight: 100;
+	opacity: 0.75;
+
+}
+
+.option-box h2 {
+	font-size: xx-large;
+	text-decoration: underline;
+}
+
+.option-box-img{
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
+	width:100%;
+	height:50%;
+	max-height: 400px;
+	object-fit: cover;
+}
+
+.cafe-restaurant-serving{
+	opacity: 0.4;
+	display: flex;
+	flex-direction: row;
+	margin-top: -0.7rem;
+}
+
+.title-location-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.location-with-icon{
+	display: flex;
+	flex-direction: row;
+}
+
+.option-box-info-container {
+padding: 0.5rem;	
+}
+
+.option-box:hover{
+	transform: scale(1.05); 
+	cursor: pointer;
+}
+
+/* Modal styling */
+
+.info-modal{
+	background:rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 0;
+	bottom: 0;
+  	left: 0;
+  	right: 0;
+	opacity: 0;
+	visibility: hidden;
+	z-index:99;
+	&:target{
+		visibility: visible;
+		opacity: 1;
+	}	
+}
+
+.modal-content{
+	position:absolute;
+	background: white;
+	margin:10% 20%;
+	min-height:50vh;
+	padding: 1rem;
+	border-radius: 2rem;
+	z-index:3;
+}
+
+.modal-link{
+	color:grey;
+}
+
+.modal-link:hover{
+	cursor: pointer;	
+}
+
+.modal-img{
+	border-top-left-radius: 2rem;
+	border-top-right-radius: 2rem;
+	width:100%;
+	height:70%;
+	max-height: 400px;
+	object-fit: cover;
+}
+
+.close-modal{
+	position:absolute;
+	width:100%;
+	height:100%;
+	cursor: default;
+	z-index:2;
+}
+
+/* Media query for various screensizes for responsive design */
+@media only screen and (max-width: 1000px) {
+	.secondary-options-container{
+		grid-template-columns: repeat(2, 1fr);
+	}
+  }
+
+@media only screen and (max-width: 700px) {
+	.main-options-container{
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.secondary-options-container{
+		grid-template-columns: repeat(1, 2fr);
+	}
+
+	.secondary-options-container .option-box{
+		min-height:320px;
+	}
+
+	.main-options-container .option-box{
+		width:80%;
+		margin:2rem;
+		
+	}
+	.filtermenu{
+		font-size: small;
+	}
+	.filtermenu input{
+		margin-bottom:0.5rem;
+	}
+
+  }
