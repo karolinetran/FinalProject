@@ -63,7 +63,7 @@ function handleLogin() {
     auth.signInWithEmailAndPassword(emailInput, passwordInput)
         .then((userCredential) => {
             const user = userCredential.user;
-            alert('Login successful!');
+			localStorage.setItem('user', JSON.stringify(user));
 			renderMainMenuOnClick();
         })
         .catch((error) => {
