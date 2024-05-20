@@ -151,9 +151,10 @@ export function renderHotels() {
 				});
 
 				const starImages = hotelModal.querySelectorAll('.star-img-user');
+				const ratingContainer = hotelModal.querySelector('.rating-container');
             	starImages.forEach((star, starIndex) => {
 					star.addEventListener('click', () => {
-						updateRating(hotel.id, starIndex + 1); 
+						updateRating(hotel.id, starIndex + 1, ratingContainer); 
 					});
 				});
 			};
@@ -188,7 +189,7 @@ export function renderHotels() {
         return starImagesHTML;
     }
 
-	function updateRating(hotelId, rating) {
+	function updateRating(hotelId, rating, ratingContainer) {
 		const hotelRef = firestore.collection('hotels').doc(hotelId);
 		const user = JSON.parse(localStorage.getItem('user'));
 		const userId = user ? user.uid : null; 
@@ -230,6 +231,9 @@ export function renderHotels() {
 			]);
 		}).then(() => {
 			console.log('Rating updated successfully for both hotel and user!');
+			if (ratingContainer) {
+				ratingContainer.innerHTML = 'Thank you for your vote!';
+			}
 		}).catch(error => {
 			console.error('Error updating rating:', error);
 		});

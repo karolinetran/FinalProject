@@ -159,9 +159,10 @@ export function renderRestaurants() {
 				});
 
 				const starImages = restaurantModal.querySelectorAll('.star-img-user');
+				const ratingContainer = restaurantModal.querySelector('.rating-container');
             	starImages.forEach((star, starIndex) => {
 					star.addEventListener('click', () => {
-						updateRating(restaurant.id, starIndex + 1);
+						updateRating(restaurant.id, starIndex + 1, ratingContainer);
 					});
 				});
 			};
@@ -196,7 +197,7 @@ export function renderRestaurants() {
         return starImagesHTML;
     }
 
-	function updateRating(restaurantId, rating) {
+	function updateRating(restaurantId, rating, ratingContainer) {
 		const restaurantRef = firestore.collection('restaurants').doc(restaurantId);
 		const user = JSON.parse(localStorage.getItem('user'));
 		const userId = user ? user.uid : null; 
@@ -238,6 +239,9 @@ export function renderRestaurants() {
 			]);
 		}).then(() => {
 			console.log('Rating updated successfully for both restaurant and user!');
+			if (ratingContainer) {
+				ratingContainer.innerHTML = 'Thank you for your vote!';
+			}
 		}).catch(error => {
 			console.error('Error updating rating:', error);
 		});

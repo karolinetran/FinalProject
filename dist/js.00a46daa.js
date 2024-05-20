@@ -58526,9 +58526,10 @@ function renderCafees() {
           addNewComment(cafe.id);
         });
         var starImages = cafeModal.querySelectorAll('.star-img-user');
+        var ratingContainer = cafeModal.querySelector('.rating-container');
         starImages.forEach(function (star, starIndex) {
           star.addEventListener('click', function () {
-            updateRating(cafe.id, starIndex + 1);
+            updateRating(cafe.id, starIndex + 1, ratingContainer);
           });
         });
       }
@@ -58560,7 +58561,7 @@ function renderCafees() {
     }
     return starImagesHTML;
   }
-  function updateRating(cafeId, rating) {
+  function updateRating(cafeId, rating, ratingContainer) {
     var cafeRef = _firebase.firestore.collection('cafees').doc(cafeId);
     var user = JSON.parse(localStorage.getItem('user'));
     var userId = user ? user.uid : null;
@@ -58593,6 +58594,9 @@ function renderCafees() {
       }), userRatingRef.update(_defineProperty({}, "cafees-".concat(cafeId), userRatings))]);
     }).then(function () {
       console.log('Rating updated successfully for both cafe and user!');
+      if (ratingContainer) {
+        ratingContainer.innerHTML = 'Thank you for your vote!';
+      }
     }).catch(function (error) {
       console.error('Error updating rating:', error);
     });
@@ -58774,9 +58778,10 @@ function renderHotels() {
           addNewComment(hotel.id);
         });
         var starImages = hotelModal.querySelectorAll('.star-img-user');
+        var ratingContainer = hotelModal.querySelector('.rating-container');
         starImages.forEach(function (star, starIndex) {
           star.addEventListener('click', function () {
-            updateRating(hotel.id, starIndex + 1);
+            updateRating(hotel.id, starIndex + 1, ratingContainer);
           });
         });
       }
@@ -58808,7 +58813,7 @@ function renderHotels() {
     }
     return starImagesHTML;
   }
-  function updateRating(hotelId, rating) {
+  function updateRating(hotelId, rating, ratingContainer) {
     var hotelRef = _firebase.firestore.collection('hotels').doc(hotelId);
     var user = JSON.parse(localStorage.getItem('user'));
     var userId = user ? user.uid : null;
@@ -58841,6 +58846,9 @@ function renderHotels() {
       }), userRatingRef.update(_defineProperty({}, "hotels-".concat(hotelId), userRatings))]);
     }).then(function () {
       console.log('Rating updated successfully for both hotel and user!');
+      if (ratingContainer) {
+        ratingContainer.innerHTML = 'Thank you for your vote!';
+      }
     }).catch(function (error) {
       console.error('Error updating rating:', error);
     });
@@ -59022,9 +59030,10 @@ function renderRestaurants() {
           addNewComment(restaurant.id);
         });
         var starImages = restaurantModal.querySelectorAll('.star-img-user');
+        var ratingContainer = restaurantModal.querySelector('.rating-container');
         starImages.forEach(function (star, starIndex) {
           star.addEventListener('click', function () {
-            updateRating(restaurant.id, starIndex + 1);
+            updateRating(restaurant.id, starIndex + 1, ratingContainer);
           });
         });
       }
@@ -59056,7 +59065,7 @@ function renderRestaurants() {
     }
     return starImagesHTML;
   }
-  function updateRating(restaurantId, rating) {
+  function updateRating(restaurantId, rating, ratingContainer) {
     var restaurantRef = _firebase.firestore.collection('restaurants').doc(restaurantId);
     var user = JSON.parse(localStorage.getItem('user'));
     var userId = user ? user.uid : null;
@@ -59089,6 +59098,9 @@ function renderRestaurants() {
       }), userRatingRef.update(_defineProperty({}, "restaurants-".concat(restaurantId), userRatings))]);
     }).then(function () {
       console.log('Rating updated successfully for both restaurant and user!');
+      if (ratingContainer) {
+        ratingContainer.innerHTML = 'Thank you for your vote!';
+      }
     }).catch(function (error) {
       console.error('Error updating rating:', error);
     });
@@ -59239,7 +59251,7 @@ function renderMainMenuForm() {
   if (user) {
     username = user.displayName || user.email;
   }
-  var mainMenuHTML = "\n    <div>\n        <div class=\"header\"> <!--Header image with text-->\n            <div class=\"header-info\">\n                <p>".concat(username, "</p>\n                <button id=\"logoutBtn\">Logg ut</button>\n            </div>\n            <h1>Hund i Oslo</h1>\n        </div>\n        <div class=\"main-options-container\"> <!--Container for options -->\n            <div class=\"option-box\" id=\"restaurantOption\">   <!--Option box with link to restaurants-->\n                <img src=\"").concat(_restaurants.default, "\" class=\"option-box-img\">\n                <h2>Restauranter</h2>\n                <p>Oversikt over restauranter i Oslo hvor du kan ta med din firbente venn!</p>\n            </div>\n            <div class=\"option-box\" id=\"cafeOption\"> <!--Option box with link to cafees-->\n                <img src=\"").concat(_cafees.default, "\" class=\"option-box-img\">\n                <h2>Kafeer og barer</h2>\n                <p>Oversikt over kafeer og barer i Oslo hvor du kan ta med din firbente venn!</p>\n            </div>\n            <div class=\"option-box\" id=\"hotelOption\"> <!--Option box with link to hotels-->\n                <img src=\"").concat(_hotels.default, "\" class=\"option-box-img\">\n                <h2>Hoteller</h2>\n                <p>Oversikt over hundevennlige hotell i Oslo!</p>\n            </div>\n        </div>\n        <div class=\"footer\"> <!--Footer with additional links(not implemented)-->\n            <div class=\"footer-container\">\n                <p class=\"footer-link\">Informasjon / Om oss</p>\n            </div>\n            <div class=\"footer-container\">\n                <p class=\"footer-link\">Mattilsynets rettningslinjer</p>\n            </div>\n            <div class=\"footer-container\">\n                <p class=\"footer-link\">Kjenner du til nye plasser? <br> Tips oss!</p>\n            </div>\n        </div>\n    </div>\n    ");
+  var mainMenuHTML = "\n    <div>\n        <div class=\"header\"> <!--Header image with text-->\n            <div class=\"header-info\">\n                <p>".concat(username, "</p>\n                <button id=\"logoutBtn\">Logg ut</button>\n            </div>\n            <h1>Hund i Oslo</h1>\n        </div>\n        <div class=\"main-options-container\"> <!--Container for options -->\n            <div class=\"option-box option-box-main\" id=\"restaurantOption\">   <!--Option box with link to restaurants-->\n                <img src=\"").concat(_restaurants.default, "\" class=\"option-box-img\">\n                <h2>Restauranter</h2>\n                <p>Oversikt over restauranter i Oslo hvor du kan ta med din firbente venn!</p>\n            </div>\n            <div class=\"option-box option-box-main\" id=\"cafeOption\"> <!--Option box with link to cafees-->\n                <img src=\"").concat(_cafees.default, "\" class=\"option-box-img\">\n                <h2>Kafeer og barer</h2>\n                <p>Oversikt over kafeer og barer i Oslo hvor du kan ta med din firbente venn!</p>\n            </div>\n            <div class=\"option-box option-box-main\" id=\"hotelOption\"> <!--Option box with link to hotels-->\n                <img src=\"").concat(_hotels.default, "\" class=\"option-box-img\">\n                <h2>Hoteller</h2>\n                <p>Oversikt over hundevennlige hotell i Oslo!</p>\n            </div>\n        </div>\n        <div class=\"footer\"> <!--Footer with additional links(not implemented)-->\n            <div class=\"footer-container\">\n                <a href=\"https://www.mattilsynet.no/mat-og-drikke/matservering/tilgang-kjaeledyr\" class=\"footer-link\">Mattilsynets rettningslinjer</a>\n            </div>\n            <div class=\"footer-container\">\n                <a href=\"mailto: kamatrrrr@gmail.com\" class=\"footer-link\">Kjenner du til nye plasser? <br> Tips oss!</p>\n            </div>\n        </div>\n    </div>\n    ");
   appDiv.innerHTML = mainMenuHTML;
 
   // Add event listeners to each option box

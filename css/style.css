@@ -167,9 +167,11 @@ a{
 }
 
 .footer-container{
-	margin-top:30px;
+	margin-top:40px;
 	font-weight: 600;
 	color:white;
+	margin-left:auto;
+	margin-right: auto;
 }
 
 .footer-link:hover{
@@ -233,14 +235,20 @@ a{
 }
 
 /* Option Box styling */
+
+
 .option-box{
 	padding:0.2rem;
 	border-radius: 0.5rem;
 	background:whitesmoke;
 	box-shadow: 10px 5px 5px rgba(0,0,0,0.2);
 	width:30%;
-	height:35vh;
+	height:50vh;
 	transition: all .2s ease-in-out; 
+	overflow-y: auto;
+}
+.option-box-main{
+	height:35vh;
 }
 
 .option-box h2{
@@ -324,6 +332,7 @@ padding: 0.5rem;
 	padding: 1rem;
 	border-radius: 2rem;
 	z-index:3;
+	width:60%;
 }
 
 .modal-link{
@@ -382,6 +391,11 @@ padding: 0.5rem;
 	}
 	.filtermenu input{
 		margin-bottom:0.5rem;
+	}
+	.footer{
+		flex-direction: column;
+		height:fit-content;
+		align-items: center;
 	}
   }
 

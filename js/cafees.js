@@ -158,9 +158,10 @@ export function renderCafees() {
 				});
 
 				const starImages = cafeModal.querySelectorAll('.star-img-user');
+				const ratingContainer = cafeModal.querySelector('.rating-container');
             	starImages.forEach((star, starIndex) => {
 					star.addEventListener('click', () => {
-						updateRating(cafe.id, starIndex + 1); 
+						updateRating(cafe.id, starIndex + 1, ratingContainer); 
 					});
 				});
 			};
@@ -195,7 +196,7 @@ export function renderCafees() {
         return starImagesHTML;
     }
 
-	function updateRating(cafeId, rating) {
+	function updateRating(cafeId, rating, ratingContainer) {
 		const cafeRef = firestore.collection('cafees').doc(cafeId);
 		const user = JSON.parse(localStorage.getItem('user'));
 		const userId = user ? user.uid : null; 
@@ -237,6 +238,9 @@ export function renderCafees() {
 			]);
 		}).then(() => {
 			console.log('Rating updated successfully for both cafe and user!');
+			if (ratingContainer) {
+				ratingContainer.innerHTML = 'Thank you for your vote!';
+			}
 		}).catch(error => {
 			console.error('Error updating rating:', error);
 		});
