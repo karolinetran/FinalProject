@@ -6,13 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel build index.html",
-    "build": "parcel build index.html --out-dir public"
+    "build": "npx -p parcel-bundler parcel build index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "http-server": "^14.1.1",
     "parcel-bundler": "^1.12.5"
   },
   "dependencies": {
