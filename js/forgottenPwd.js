@@ -1,5 +1,8 @@
 // forgottenPwd.js
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { renderLoginForm } from './loginForm.js';
+import { auth } from './firebase.js';
+
 
 export function renderForgottenPwdForm() {
     const appDiv = document.getElementById('app');
@@ -29,7 +32,17 @@ export function renderForgottenPwdForm() {
 function handleResetPassword() {
     const emailInput = document.getElementById('email').value;
 
-    console.log('Passord tilbakestilt via email:', emailInput);
+    sendPasswordResetEmail(auth, emailInput)
+        .then(() => {
+            console.log('Password reset email sent:', emailInput);
+            alert('Tilbakestilling av passord er sendt til e-posten.');
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error('Error sending password reset email:', errorMessage);
+            alert(`Error sending password reset email: ${errorMessage}`);
+        });
 }
 
 function backBtnClick(event) {

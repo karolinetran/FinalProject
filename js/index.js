@@ -1,14 +1,24 @@
 import { renderLoginForm } from './loginForm.js';
 import { renderMainMenuForm } from './mainMenu';
+import { renderNotVerified } from './notVerified.js';
+import { auth } from './firebase.js';
+import { onAuthStateChanged } from 'firebase/auth';
 
 document.addEventListener('DOMContentLoaded', () => {
     const user = JSON.parse(localStorage.getItem('user'));
 
-    if (user) {
-        // If there is a valid user in local storage, render the main menu
-        renderMainMenuForm();
-    } else {
-        // If there is no valid user in local storage, render the login form
-        renderLoginForm();
-    }
+    onAuthStateChanged(auth, (firebaseUser) => {
+        if (firebaseUser) {
+            // User is signed in
+            if (firebaseUser.emailVerified) {
+                localStorage.setItem('user', JSON.stringify(firebaseUser));
+                renderMainMenuForm();
+            } else {
+                renderNotVerified();
+            }
+        } else {
+            // No user is signed in
+            renderLoginForm();
+        }
+    });
 });

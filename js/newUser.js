@@ -1,5 +1,7 @@
 // newUser.js
 import { auth } from './firebase';
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
+
 
 import { renderLoginForm } from './loginForm.js';
 
@@ -45,18 +47,34 @@ function handleSignUp() {
     const emailInput = document.getElementById('email').value;
     const passwordInput = document.getElementById('password').value;
 
-    auth.createUserWithEmailAndPassword(emailInput, passwordInput)
+    createUserWithEmailAndPassword(auth, emailInput, passwordInput)
         .then((userCredential) => {
             const user = userCredential.user;
             console.log('User signed up:', user);
-            user.updateProfile({
+            
+            updateProfile(user, {
                 displayName: `${firstNameInput} ${lastNameInput}`
+            }).then(() => {
+                console.log('User profile updated.');
+            }).catch((error) => {
+                console.error('Error updating profile:', error);
             });
+            
+            // Send verification email
+            sendEmailVerification(user)
+                .then(() => {
+                    console.log('Verification email sent.');
+                })
+                .catch((error) => {
+                    console.error('Error sending verification email:', error);
+                });
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.error('Error signing up:', errorMessage);
+            // Optionally, display error messages to the user
+            alert(`Error signing up: ${errorMessage}`);
         });
 }
 

@@ -136,7 +136,7 @@ export function renderHotels() {
 							</div>
 							<div class="comments-container">
 							${renderComments(hotel.comments)}
-							${renderNewCommentInput()}
+							${renderNewCommentInput(hotel.id)}
 							</div>
 						</div>
 					</div>
@@ -189,58 +189,39 @@ export function renderHotels() {
         return starImagesHTML;
     }
 
-	function updateRating(hotelId, rating, ratingContainer) {
-		const hotelRef = firestore.collection('hotels').doc(hotelId);
-		const user = JSON.parse(localStorage.getItem('user'));
-		const userId = user ? user.uid : null; 
+	async function updateRating(hotelId, rating, ratingContainer) {
+		try {
+			const user = JSON.parse(localStorage.getItem('user'));
+			const userId = user ? user.uid : null;
 	
-		if (!userId) {
-			console.error('User not logged in!');
-			return;
-		}
-	
-		const userRatingRef = firestore.collection('users').doc(userId);
-	
-		let hotelRatings;
-		let userRatings;
-	
-		hotelRef.get().then(doc => {
-			if (doc.exists) {
-				hotelRatings = doc.data().rating || [];
-			} else {
-				console.error('Hotel document does not exist!');
+			if (!userId) {
+				console.error('User not logged in!');
 				return;
 			}
 	
-			return userRatingRef.get();
-		}).then(doc => {
-			if (doc.exists) {
-				userRatings = doc.data()[`hotels-${hotelId}`] || [];
-			} else {
-				console.error('User document does not exist!');
+			const hotelRef = firestore.collection('hotels').doc(hotelId);
+	
+			const hotelDoc = await hotelRef.get();
+			if (!hotelDoc.exists) {
+				console.error('hotel document does not exist!');
 				return;
 			}
 	
-			hotelRatings.push(rating);
+			const hotelRating = hotelDoc.data().rating || [];
+			hotelRating.push(rating);
 	
-			userRatings.push(rating);
-	
-			return Promise.all([
-				hotelRef.update({ rating: hotelRatings }),
-				userRatingRef.update({ [`hotels-${hotelId}`]: userRatings })
+			await Promise.all([
+				hotelRef.update({ rating: hotelRating }),
 			]);
-		}).then(() => {
-			console.log('Rating updated successfully for both hotel and user!');
+	
+			console.log('Rating updated successfully for hotel!');
 			if (ratingContainer) {
 				ratingContainer.innerHTML = 'Thank you for your vote!';
 			}
-		}).catch(error => {
+		} catch (error) {
 			console.error('Error updating rating:', error);
-		});
+		}
 	}
-	
-	
-	
 	
 
 	function calculateAverageRating(ratings) {
@@ -269,7 +250,7 @@ export function renderHotels() {
 			username = user.displayName || user.email;
 		}
 	
-		const commentInput = document.getElementById('comment');
+		const commentInput = document.getElementById(`comment-${hotelName}`);
 		
 		if (username && commentInput) {
 			const commentText = commentInput.value.trim();
@@ -300,10 +281,10 @@ export function renderHotels() {
 		}
 	}
 	
-	function renderNewCommentInput() {
+	function renderNewCommentInput(hotelName) {
 		return `
 			<div class="new-comment">
-				<input type="text" id="comment" placeholder="Write a comment...">
+				<input type="text" id="comment-${hotelName}" placeholder="Write a comment...">
 				<button id="add-comment-button">Add Comment</button>
 			</div>
 		`;

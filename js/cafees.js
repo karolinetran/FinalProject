@@ -18,11 +18,11 @@ export function renderCafees() {
 				<form id="filter">
 					<p>Servering</p>
 					<div>
-						<input id="innservering" type="checkbox">
+						<input class="filter-checkbox-inout" id="innservering" type="checkbox">
 						<label for="innservering">Inneservering</label>
 					</div>
 					<div>
-						<input id="uteservering" type="checkbox">
+						<input class="filter-checkbox-inout" id="uteservering" type="checkbox">
 						<label for="uteservering">Uteservering</label>
 					</div>
 					<p>Bydel</p>
@@ -143,7 +143,7 @@ export function renderCafees() {
 							</div>
 							<div class="comments-container">
 							${renderComments(cafe.comments)}
-							${renderNewCommentInput()}
+							${renderNewCommentInput(cafe.id)}
 							</div>
 						</div>
 					</div>
@@ -196,56 +196,39 @@ export function renderCafees() {
         return starImagesHTML;
     }
 
-	function updateRating(cafeId, rating, ratingContainer) {
-		const cafeRef = firestore.collection('cafees').doc(cafeId);
-		const user = JSON.parse(localStorage.getItem('user'));
-		const userId = user ? user.uid : null; 
+	async function updateRating(cafeId, rating, ratingContainer) {
+		try {
+			const user = JSON.parse(localStorage.getItem('user'));
+			const userId = user ? user.uid : null;
+
+			if (!userId) {
+				console.error('User not logged in!');
+				return;
+			}
 	
-		if (!userId) {
-			console.error('User not logged in!');
-			return;
-		}
+			const cafeRef = firestore.collection('cafees').doc(cafeId);
 	
-		const userRatingRef = firestore.collection('users').doc(userId);
-	
-		let cafeRatings;
-		let userRatings;
-	
-		cafeRef.get().then(doc => {
-			if (doc.exists) {
-				cafeRatings = doc.data().rating || [];
-			} else {
+			const cafeDoc = await cafeRef.get();
+			if (!cafeDoc.exists) {
 				console.error('cafe document does not exist!');
 				return;
 			}
 	
-			return userRatingRef.get();
-		}).then(doc => {
-			if (doc.exists) {
-				userRatings = doc.data()[`cafees-${cafeId}`] || [];
-			} else {
-				console.error('User document does not exist!');
-				return;
-			}
+			const cafeRating = cafeDoc.data().rating || [];
+			cafeRating.push(rating);
 	
-			cafeRatings.push(rating);
-	
-			userRatings.push(rating);
-	
-			return Promise.all([
-				cafeRef.update({ rating: cafeRatings }),
-				userRatingRef.update({ [`cafees-${cafeId}`]: userRatings })
+			await Promise.all([
+				cafeRef.update({ rating: cafeRating }),
 			]);
-		}).then(() => {
-			console.log('Rating updated successfully for both cafe and user!');
+	
+			console.log('Rating updated successfully for cafe!');
 			if (ratingContainer) {
 				ratingContainer.innerHTML = 'Thank you for your vote!';
 			}
-		}).catch(error => {
+		} catch (error) {
 			console.error('Error updating rating:', error);
-		});
+		}
 	}
-	
 	
 	
 	
@@ -275,8 +258,8 @@ export function renderCafees() {
 		if (user) {
 			username = user.displayName || user.email;
 		}
-	
-		const commentInput = document.getElementById('comment');
+		console.log(cafeName)
+		const commentInput = document.getElementById(`comment-${cafeName}`);
 		
 		if (username && commentInput) {
 			const commentText = commentInput.value.trim();
@@ -307,10 +290,11 @@ export function renderCafees() {
 		}
 	}
 	
-	function renderNewCommentInput() {
+	function renderNewCommentInput(cafeName) {
+		console.log(cafeName)
 		return `
 			<div class="new-comment">
-				<input type="text" id="comment" placeholder="Write a comment...">
+				<input type="text" id='comment-${cafeName}' placeholder="Write a comment...">
 				<button id="add-comment-button">Add Comment</button>
 			</div>
 		`;

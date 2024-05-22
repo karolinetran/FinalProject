@@ -58397,7 +58397,540 @@ var firebaseApp = _app.default.initializeApp(firebaseConfig);
 var auth = exports.auth = firebaseApp.auth();
 var firestore = exports.firestore = _app.default.firestore();
 var storage = exports.storage = firebaseApp.storage();
-},{"firebase/compat/app":"node_modules/firebase/compat/app/dist/esm/index.esm.js","firebase/compat/auth":"node_modules/firebase/compat/auth/dist/esm/index.esm.js","firebase/compat/firestore":"node_modules/firebase/compat/firestore/dist/esm/index.esm.js","firebase/compat/storage":"node_modules/firebase/compat/storage/dist/esm/index.esm.js"}],"js/newUser.js":[function(require,module,exports) {
+},{"firebase/compat/app":"node_modules/firebase/compat/app/dist/esm/index.esm.js","firebase/compat/auth":"node_modules/firebase/compat/auth/dist/esm/index.esm.js","firebase/compat/firestore":"node_modules/firebase/compat/firestore/dist/esm/index.esm.js","firebase/compat/storage":"node_modules/firebase/compat/storage/dist/esm/index.esm.js"}],"node_modules/@firebase/auth/dist/esm2017/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "ActionCodeOperation", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.A;
+  }
+});
+Object.defineProperty(exports, "ActionCodeURL", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.ai;
+  }
+});
+Object.defineProperty(exports, "AuthCredential", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.L;
+  }
+});
+Object.defineProperty(exports, "AuthErrorCodes", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.I;
+  }
+});
+Object.defineProperty(exports, "EmailAuthCredential", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.M;
+  }
+});
+Object.defineProperty(exports, "EmailAuthProvider", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.V;
+  }
+});
+Object.defineProperty(exports, "FacebookAuthProvider", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.W;
+  }
+});
+Object.defineProperty(exports, "FactorId", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.F;
+  }
+});
+Object.defineProperty(exports, "GithubAuthProvider", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.Y;
+  }
+});
+Object.defineProperty(exports, "GoogleAuthProvider", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.X;
+  }
+});
+Object.defineProperty(exports, "OAuthCredential", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.N;
+  }
+});
+Object.defineProperty(exports, "OAuthProvider", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.Z;
+  }
+});
+Object.defineProperty(exports, "OperationType", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.O;
+  }
+});
+Object.defineProperty(exports, "PhoneAuthCredential", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.Q;
+  }
+});
+Object.defineProperty(exports, "PhoneAuthProvider", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.P;
+  }
+});
+Object.defineProperty(exports, "PhoneMultiFactorGenerator", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.m;
+  }
+});
+Object.defineProperty(exports, "ProviderId", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.p;
+  }
+});
+Object.defineProperty(exports, "RecaptchaVerifier", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.R;
+  }
+});
+Object.defineProperty(exports, "SAMLAuthProvider", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d._;
+  }
+});
+Object.defineProperty(exports, "SignInMethod", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.S;
+  }
+});
+Object.defineProperty(exports, "TotpMultiFactorGenerator", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.T;
+  }
+});
+Object.defineProperty(exports, "TotpSecret", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.n;
+  }
+});
+Object.defineProperty(exports, "TwitterAuthProvider", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.$;
+  }
+});
+Object.defineProperty(exports, "applyActionCode", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.a7;
+  }
+});
+Object.defineProperty(exports, "beforeAuthStateChanged", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.x;
+  }
+});
+Object.defineProperty(exports, "browserLocalPersistence", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.b;
+  }
+});
+Object.defineProperty(exports, "browserPopupRedirectResolver", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.k;
+  }
+});
+Object.defineProperty(exports, "browserSessionPersistence", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.a;
+  }
+});
+Object.defineProperty(exports, "checkActionCode", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.a8;
+  }
+});
+Object.defineProperty(exports, "confirmPasswordReset", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.a6;
+  }
+});
+Object.defineProperty(exports, "connectAuthEmulator", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.K;
+  }
+});
+Object.defineProperty(exports, "createUserWithEmailAndPassword", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.aa;
+  }
+});
+Object.defineProperty(exports, "debugErrorMap", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.G;
+  }
+});
+Object.defineProperty(exports, "deleteUser", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.E;
+  }
+});
+Object.defineProperty(exports, "fetchSignInMethodsForEmail", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.af;
+  }
+});
+Object.defineProperty(exports, "getAdditionalUserInfo", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.aq;
+  }
+});
+Object.defineProperty(exports, "getAuth", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.o;
+  }
+});
+Object.defineProperty(exports, "getIdToken", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.an;
+  }
+});
+Object.defineProperty(exports, "getIdTokenResult", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.ao;
+  }
+});
+Object.defineProperty(exports, "getMultiFactorResolver", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.as;
+  }
+});
+Object.defineProperty(exports, "getRedirectResult", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.j;
+  }
+});
+Object.defineProperty(exports, "inMemoryPersistence", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.U;
+  }
+});
+Object.defineProperty(exports, "indexedDBLocalPersistence", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.i;
+  }
+});
+Object.defineProperty(exports, "initializeAuth", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.J;
+  }
+});
+Object.defineProperty(exports, "initializeRecaptchaConfig", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.t;
+  }
+});
+Object.defineProperty(exports, "isSignInWithEmailLink", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.ad;
+  }
+});
+Object.defineProperty(exports, "linkWithCredential", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.a2;
+  }
+});
+Object.defineProperty(exports, "linkWithPhoneNumber", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.l;
+  }
+});
+Object.defineProperty(exports, "linkWithPopup", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.d;
+  }
+});
+Object.defineProperty(exports, "linkWithRedirect", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.g;
+  }
+});
+Object.defineProperty(exports, "multiFactor", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.at;
+  }
+});
+Object.defineProperty(exports, "onAuthStateChanged", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.y;
+  }
+});
+Object.defineProperty(exports, "onIdTokenChanged", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.w;
+  }
+});
+Object.defineProperty(exports, "parseActionCodeURL", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.aj;
+  }
+});
+Object.defineProperty(exports, "prodErrorMap", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.H;
+  }
+});
+Object.defineProperty(exports, "reauthenticateWithCredential", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.a3;
+  }
+});
+Object.defineProperty(exports, "reauthenticateWithPhoneNumber", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.r;
+  }
+});
+Object.defineProperty(exports, "reauthenticateWithPopup", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.e;
+  }
+});
+Object.defineProperty(exports, "reauthenticateWithRedirect", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.h;
+  }
+});
+Object.defineProperty(exports, "reload", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.ar;
+  }
+});
+Object.defineProperty(exports, "revokeAccessToken", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.D;
+  }
+});
+Object.defineProperty(exports, "sendEmailVerification", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.ag;
+  }
+});
+Object.defineProperty(exports, "sendPasswordResetEmail", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.a5;
+  }
+});
+Object.defineProperty(exports, "sendSignInLinkToEmail", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.ac;
+  }
+});
+Object.defineProperty(exports, "setPersistence", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.q;
+  }
+});
+Object.defineProperty(exports, "signInAnonymously", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.a0;
+  }
+});
+Object.defineProperty(exports, "signInWithCredential", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.a1;
+  }
+});
+Object.defineProperty(exports, "signInWithCustomToken", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.a4;
+  }
+});
+Object.defineProperty(exports, "signInWithEmailAndPassword", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.ab;
+  }
+});
+Object.defineProperty(exports, "signInWithEmailLink", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.ae;
+  }
+});
+Object.defineProperty(exports, "signInWithPhoneNumber", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.s;
+  }
+});
+Object.defineProperty(exports, "signInWithPopup", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.c;
+  }
+});
+Object.defineProperty(exports, "signInWithRedirect", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.f;
+  }
+});
+Object.defineProperty(exports, "signOut", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.C;
+  }
+});
+Object.defineProperty(exports, "unlink", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.ap;
+  }
+});
+Object.defineProperty(exports, "updateCurrentUser", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.B;
+  }
+});
+Object.defineProperty(exports, "updateEmail", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.al;
+  }
+});
+Object.defineProperty(exports, "updatePassword", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.am;
+  }
+});
+Object.defineProperty(exports, "updatePhoneNumber", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.u;
+  }
+});
+Object.defineProperty(exports, "updateProfile", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.ak;
+  }
+});
+Object.defineProperty(exports, "useDeviceLanguage", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.z;
+  }
+});
+Object.defineProperty(exports, "validatePassword", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.v;
+  }
+});
+Object.defineProperty(exports, "verifyBeforeUpdateEmail", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.ah;
+  }
+});
+Object.defineProperty(exports, "verifyPasswordResetCode", {
+  enumerable: true,
+  get: function () {
+    return _indexD0d.a9;
+  }
+});
+var _indexD0d = require("./index-d0d29856.js");
+require("@firebase/app");
+require("@firebase/util");
+require("@firebase/logger");
+require("tslib");
+require("@firebase/component");
+},{"./index-d0d29856.js":"node_modules/@firebase/auth/dist/esm2017/index-d0d29856.js","@firebase/app":"node_modules/@firebase/app/dist/esm/index.esm2017.js","@firebase/util":"node_modules/@firebase/util/dist/index.esm2017.js","@firebase/logger":"node_modules/@firebase/logger/dist/esm/index.esm2017.js","tslib":"node_modules/tslib/tslib.es6.js","@firebase/component":"node_modules/@firebase/component/dist/esm/index.esm2017.js"}],"node_modules/firebase/auth/dist/esm/index.esm.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _auth = require("@firebase/auth");
+Object.keys(_auth).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _auth[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _auth[key];
+    }
+  });
+});
+},{"@firebase/auth":"node_modules/@firebase/auth/dist/esm2017/index.js"}],"js/newUser.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -58405,6 +58938,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.renderNewUserForm = renderNewUserForm;
 var _firebase = require("./firebase");
+var _auth = require("firebase/auth");
 var _loginForm = require("./loginForm.js");
 // newUser.js
 
@@ -58422,30 +58956,45 @@ function handleSignUp() {
   var lastNameInput = document.getElementById('lastName').value;
   var emailInput = document.getElementById('email').value;
   var passwordInput = document.getElementById('password').value;
-  _firebase.auth.createUserWithEmailAndPassword(emailInput, passwordInput).then(function (userCredential) {
+  (0, _auth.createUserWithEmailAndPassword)(_firebase.auth, emailInput, passwordInput).then(function (userCredential) {
     var user = userCredential.user;
     console.log('User signed up:', user);
-    user.updateProfile({
+    (0, _auth.updateProfile)(user, {
       displayName: "".concat(firstNameInput, " ").concat(lastNameInput)
+    }).then(function () {
+      console.log('User profile updated.');
+    }).catch(function (error) {
+      console.error('Error updating profile:', error);
+    });
+
+    // Send verification email
+    (0, _auth.sendEmailVerification)(user).then(function () {
+      console.log('Verification email sent.');
+    }).catch(function (error) {
+      console.error('Error sending verification email:', error);
     });
   }).catch(function (error) {
     var errorCode = error.code;
     var errorMessage = error.message;
     console.error('Error signing up:', errorMessage);
+    // Optionally, display error messages to the user
+    alert("Error signing up: ".concat(errorMessage));
   });
 }
 function backBtnClick(event) {
   event.preventDefault();
   (0, _loginForm.renderLoginForm)();
 }
-},{"./firebase":"js/firebase.js","./loginForm.js":"js/loginForm.js"}],"js/forgottenPwd.js":[function(require,module,exports) {
+},{"./firebase":"js/firebase.js","firebase/auth":"node_modules/firebase/auth/dist/esm/index.esm.js","./loginForm.js":"js/loginForm.js"}],"js/forgottenPwd.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.renderForgottenPwdForm = renderForgottenPwdForm;
+var _auth = require("firebase/auth");
 var _loginForm = require("./loginForm.js");
+var _firebase = require("./firebase.js");
 // forgottenPwd.js
 
 function renderForgottenPwdForm() {
@@ -58459,13 +59008,21 @@ function renderForgottenPwdForm() {
 }
 function handleResetPassword() {
   var emailInput = document.getElementById('email').value;
-  console.log('Passord tilbakestilt via email:', emailInput);
+  (0, _auth.sendPasswordResetEmail)(_firebase.auth, emailInput).then(function () {
+    console.log('Password reset email sent:', emailInput);
+    alert('Tilbakestilling av passord er sendt til e-posten.');
+  }).catch(function (error) {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.error('Error sending password reset email:', errorMessage);
+    alert("Error sending password reset email: ".concat(errorMessage));
+  });
 }
 function backBtnClick(event) {
   event.preventDefault();
   (0, _loginForm.renderLoginForm)();
 }
-},{"./loginForm.js":"js/loginForm.js"}],"assets/imgs/restaurants.jpg":[function(require,module,exports) {
+},{"firebase/auth":"node_modules/firebase/auth/dist/esm/index.esm.js","./loginForm.js":"js/loginForm.js","./firebase.js":"js/firebase.js"}],"assets/imgs/restaurants.jpg":[function(require,module,exports) {
 module.exports = "/restaurants.b0339adb.jpg";
 },{}],"assets/imgs/cafees.jpg":[function(require,module,exports) {
 module.exports = "/cafees.dd9f69c7.jpg";
@@ -58487,6 +59044,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator.return && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, catch: function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -58498,12 +59056,11 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function renderCafees() {
   var appDiv = document.getElementById('app');
-  var cafeesHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Servering</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input id=\"innservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"innservering\">Inneservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input id=\"uteservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"uteservering\">Uteservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"cafees-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
+  var cafeesHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Servering</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"innservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"innservering\">Inneservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"uteservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"uteservering\">Uteservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"cafees-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
   appDiv.innerHTML = cafeesHTML;
   var cafeesContainer = document.getElementById('cafees-container');
   function displaycafees(cafees, images) {
@@ -58518,7 +59075,7 @@ function renderCafees() {
         var imageSrc = images[index];
         var averageRating = calculateAverageRating(cafe.rating);
         cafeDiv.innerHTML = "\n\t\t\t\t\t<a href=\"#".concat(cafe.name, "\">\n\t\t\t\t\t\t<img src=").concat(imageSrc, " class=\"option-box-img\">\n\t\t\t\t\t\t<div class=\"option-box-info-container\">\n\t\t\t\t\t\t\t<div class=\"title-location-container\">\n\t\t\t\t\t\t\t\t<h2>").concat(cafe.name, "</h2>\n\t\t\t\t\t\t\t\t<div class=\"location-with-icon\">\n\t\t\t\t\t\t\t\t\t<i class=\"fa-solid fa-map-location-dot\"></i>\n\t\t\t\t\t\t\t\t\t<p class=\"location\">").concat(cafe.location, "</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t\t<p>").concat(averageRating, "</p>\n\t\t\t\t\t\t\t\t<img src=").concat(_star.default, " class=\"star-img\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<p>").concat(cafe.infoShort, "</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</a>\n\t\t\t\t");
-        cafeModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(cafe.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(cafe.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(cafe.link, ">").concat(cafe.link, "</a>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t").concat(renderComments(cafe.comments), "\n\t\t\t\t\t\t\t").concat(renderNewCommentInput(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
+        cafeModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(cafe.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(cafe.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(cafe.link, ">").concat(cafe.link, "</a>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t").concat(renderComments(cafe.comments), "\n\t\t\t\t\t\t\t").concat(renderNewCommentInput(cafe.id), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
         cafeesContainer.appendChild(cafeDiv);
         cafeesContainer.appendChild(cafeModal);
         var addCommentButton = cafeModal.querySelector('#add-comment-button');
@@ -58561,45 +59118,61 @@ function renderCafees() {
     }
     return starImagesHTML;
   }
-  function updateRating(cafeId, rating, ratingContainer) {
-    var cafeRef = _firebase.firestore.collection('cafees').doc(cafeId);
-    var user = JSON.parse(localStorage.getItem('user'));
-    var userId = user ? user.uid : null;
-    if (!userId) {
-      console.error('User not logged in!');
-      return;
-    }
-    var userRatingRef = _firebase.firestore.collection('users').doc(userId);
-    var cafeRatings;
-    var userRatings;
-    cafeRef.get().then(function (doc) {
-      if (doc.exists) {
-        cafeRatings = doc.data().rating || [];
-      } else {
-        console.error('cafe document does not exist!');
-        return;
-      }
-      return userRatingRef.get();
-    }).then(function (doc) {
-      if (doc.exists) {
-        userRatings = doc.data()["cafees-".concat(cafeId)] || [];
-      } else {
-        console.error('User document does not exist!');
-        return;
-      }
-      cafeRatings.push(rating);
-      userRatings.push(rating);
-      return Promise.all([cafeRef.update({
-        rating: cafeRatings
-      }), userRatingRef.update(_defineProperty({}, "cafees-".concat(cafeId), userRatings))]);
-    }).then(function () {
-      console.log('Rating updated successfully for both cafe and user!');
-      if (ratingContainer) {
-        ratingContainer.innerHTML = 'Thank you for your vote!';
-      }
-    }).catch(function (error) {
-      console.error('Error updating rating:', error);
-    });
+  function updateRating(_x, _x2, _x3) {
+    return _updateRating.apply(this, arguments);
+  }
+  function _updateRating() {
+    _updateRating = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(cafeId, rating, ratingContainer) {
+      var user, userId, cafeRef, cafeDoc, cafeRating;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            user = JSON.parse(localStorage.getItem('user'));
+            userId = user ? user.uid : null;
+            if (userId) {
+              _context.next = 6;
+              break;
+            }
+            console.error('User not logged in!');
+            return _context.abrupt("return");
+          case 6:
+            cafeRef = _firebase.firestore.collection('cafees').doc(cafeId);
+            _context.next = 9;
+            return cafeRef.get();
+          case 9:
+            cafeDoc = _context.sent;
+            if (cafeDoc.exists) {
+              _context.next = 13;
+              break;
+            }
+            console.error('cafe document does not exist!');
+            return _context.abrupt("return");
+          case 13:
+            cafeRating = cafeDoc.data().rating || [];
+            cafeRating.push(rating);
+            _context.next = 17;
+            return Promise.all([cafeRef.update({
+              rating: cafeRating
+            })]);
+          case 17:
+            console.log('Rating updated successfully for cafe!');
+            if (ratingContainer) {
+              ratingContainer.innerHTML = 'Thank you for your vote!';
+            }
+            _context.next = 24;
+            break;
+          case 21:
+            _context.prev = 21;
+            _context.t0 = _context["catch"](0);
+            console.error('Error updating rating:', _context.t0);
+          case 24:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[0, 21]]);
+    }));
+    return _updateRating.apply(this, arguments);
   }
   function calculateAverageRating(ratings) {
     if (ratings.length === 0) return "-";
@@ -58628,7 +59201,8 @@ function renderCafees() {
     if (user) {
       username = user.displayName || user.email;
     }
-    var commentInput = document.getElementById('comment');
+    console.log(cafeName);
+    var commentInput = document.getElementById("comment-".concat(cafeName));
     if (username && commentInput) {
       var commentText = commentInput.value.trim();
       commentInput.value = '';
@@ -58653,8 +59227,9 @@ function renderCafees() {
       }
     }
   }
-  function renderNewCommentInput() {
-    return "\n\t\t\t<div class=\"new-comment\">\n\t\t\t\t<input type=\"text\" id=\"comment\" placeholder=\"Write a comment...\">\n\t\t\t\t<button id=\"add-comment-button\">Add Comment</button>\n\t\t\t</div>\n\t\t";
+  function renderNewCommentInput(cafeName) {
+    console.log(cafeName);
+    return "\n\t\t\t<div class=\"new-comment\">\n\t\t\t\t<input type=\"text\" id='comment-".concat(cafeName, "' placeholder=\"Write a comment...\">\n\t\t\t\t<button id=\"add-comment-button\">Add Comment</button>\n\t\t\t</div>\n\t\t");
   }
 
   /* FILTER */
@@ -58739,6 +59314,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator.return && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, catch: function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -58750,9 +59326,8 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function renderHotels() {
   var appDiv = document.getElementById('app');
   var hotelsHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"hotels-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
@@ -58770,7 +59345,7 @@ function renderHotels() {
         var imageSrc = images[index];
         var averageRating = calculateAverageRating(hotel.rating);
         hotelDiv.innerHTML = "\n\t\t\t\t\t<a href=\"#".concat(hotel.name, "\">\n\t\t\t\t\t\t<img src=").concat(imageSrc, " class=\"option-box-img\">\n\t\t\t\t\t\t<div class=\"option-box-info-container\">\n\t\t\t\t\t\t\t<div class=\"title-location-container\">\n\t\t\t\t\t\t\t\t<h2>").concat(hotel.name, "</h2>\n\t\t\t\t\t\t\t\t<div class=\"location-with-icon\">\n\t\t\t\t\t\t\t\t\t<i class=\"fa-solid fa-map-location-dot\"></i>\n\t\t\t\t\t\t\t\t\t<p class=\"location\">").concat(hotel.location, "</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t\t<p>").concat(averageRating, "</p>\n\t\t\t\t\t\t\t\t<img src=").concat(_star.default, " class=\"star-img\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<p>").concat(hotel.infoShort, "</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</a>\n\t\t\t\t");
-        hotelModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(hotel.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(hotel.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(hotel.link, ">").concat(hotel.link, "</a>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t").concat(renderComments(hotel.comments), "\n\t\t\t\t\t\t\t").concat(renderNewCommentInput(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
+        hotelModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(hotel.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(hotel.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(hotel.link, ">").concat(hotel.link, "</a>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t").concat(renderComments(hotel.comments), "\n\t\t\t\t\t\t\t").concat(renderNewCommentInput(hotel.id), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
         hotelsContainer.appendChild(hotelDiv);
         hotelsContainer.appendChild(hotelModal);
         var addCommentButton = hotelModal.querySelector('#add-comment-button');
@@ -58813,45 +59388,61 @@ function renderHotels() {
     }
     return starImagesHTML;
   }
-  function updateRating(hotelId, rating, ratingContainer) {
-    var hotelRef = _firebase.firestore.collection('hotels').doc(hotelId);
-    var user = JSON.parse(localStorage.getItem('user'));
-    var userId = user ? user.uid : null;
-    if (!userId) {
-      console.error('User not logged in!');
-      return;
-    }
-    var userRatingRef = _firebase.firestore.collection('users').doc(userId);
-    var hotelRatings;
-    var userRatings;
-    hotelRef.get().then(function (doc) {
-      if (doc.exists) {
-        hotelRatings = doc.data().rating || [];
-      } else {
-        console.error('Hotel document does not exist!');
-        return;
-      }
-      return userRatingRef.get();
-    }).then(function (doc) {
-      if (doc.exists) {
-        userRatings = doc.data()["hotels-".concat(hotelId)] || [];
-      } else {
-        console.error('User document does not exist!');
-        return;
-      }
-      hotelRatings.push(rating);
-      userRatings.push(rating);
-      return Promise.all([hotelRef.update({
-        rating: hotelRatings
-      }), userRatingRef.update(_defineProperty({}, "hotels-".concat(hotelId), userRatings))]);
-    }).then(function () {
-      console.log('Rating updated successfully for both hotel and user!');
-      if (ratingContainer) {
-        ratingContainer.innerHTML = 'Thank you for your vote!';
-      }
-    }).catch(function (error) {
-      console.error('Error updating rating:', error);
-    });
+  function updateRating(_x, _x2, _x3) {
+    return _updateRating.apply(this, arguments);
+  }
+  function _updateRating() {
+    _updateRating = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(hotelId, rating, ratingContainer) {
+      var user, userId, hotelRef, hotelDoc, hotelRating;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            user = JSON.parse(localStorage.getItem('user'));
+            userId = user ? user.uid : null;
+            if (userId) {
+              _context.next = 6;
+              break;
+            }
+            console.error('User not logged in!');
+            return _context.abrupt("return");
+          case 6:
+            hotelRef = _firebase.firestore.collection('hotels').doc(hotelId);
+            _context.next = 9;
+            return hotelRef.get();
+          case 9:
+            hotelDoc = _context.sent;
+            if (hotelDoc.exists) {
+              _context.next = 13;
+              break;
+            }
+            console.error('hotel document does not exist!');
+            return _context.abrupt("return");
+          case 13:
+            hotelRating = hotelDoc.data().rating || [];
+            hotelRating.push(rating);
+            _context.next = 17;
+            return Promise.all([hotelRef.update({
+              rating: hotelRating
+            })]);
+          case 17:
+            console.log('Rating updated successfully for hotel!');
+            if (ratingContainer) {
+              ratingContainer.innerHTML = 'Thank you for your vote!';
+            }
+            _context.next = 24;
+            break;
+          case 21:
+            _context.prev = 21;
+            _context.t0 = _context["catch"](0);
+            console.error('Error updating rating:', _context.t0);
+          case 24:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[0, 21]]);
+    }));
+    return _updateRating.apply(this, arguments);
   }
   function calculateAverageRating(ratings) {
     if (ratings.length === 0) return "-";
@@ -58880,7 +59471,7 @@ function renderHotels() {
     if (user) {
       username = user.displayName || user.email;
     }
-    var commentInput = document.getElementById('comment');
+    var commentInput = document.getElementById("comment-".concat(hotelName));
     if (username && commentInput) {
       var commentText = commentInput.value.trim();
       commentInput.value = '';
@@ -58905,8 +59496,8 @@ function renderHotels() {
       }
     }
   }
-  function renderNewCommentInput() {
-    return "\n\t\t\t<div class=\"new-comment\">\n\t\t\t\t<input type=\"text\" id=\"comment\" placeholder=\"Write a comment...\">\n\t\t\t\t<button id=\"add-comment-button\">Add Comment</button>\n\t\t\t</div>\n\t\t";
+  function renderNewCommentInput(hotelName) {
+    return "\n\t\t\t<div class=\"new-comment\">\n\t\t\t\t<input type=\"text\" id=\"comment-".concat(hotelName, "\" placeholder=\"Write a comment...\">\n\t\t\t\t<button id=\"add-comment-button\">Add Comment</button>\n\t\t\t</div>\n\t\t");
   }
 
   /* FILTER */
@@ -58991,6 +59582,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator.return && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, catch: function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -59002,12 +59594,11 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function renderRestaurants() {
   var appDiv = document.getElementById('app');
-  var restaurantsHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Servering</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input id=\"innservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"innservering\">Inneservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input id=\"uteservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"uteservering\">Uteservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"restaurants-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
+  var restaurantsHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Servering</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"innservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"innservering\">Inneservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"uteservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"uteservering\">Uteservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"restaurants-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
   appDiv.innerHTML = restaurantsHTML;
   var restaurantsContainer = document.getElementById('restaurants-container');
   function displayRestaurants(restaurants, images) {
@@ -59022,7 +59613,7 @@ function renderRestaurants() {
         var imageSrc = images[index];
         var averageRating = calculateAverageRating(restaurant.rating);
         restaurantDiv.innerHTML = "\n\t\t\t\t\t<a href=\"#".concat(restaurant.name, "\">\n\t\t\t\t\t\t<img src=").concat(imageSrc, " class=\"option-box-img\">\n\t\t\t\t\t\t<div class=\"option-box-info-container\">\n\t\t\t\t\t\t\t<div class=\"title-location-container\">\n\t\t\t\t\t\t\t\t<h2>").concat(restaurant.name, "</h2>\n\t\t\t\t\t\t\t\t<div class=\"location-with-icon\">\n\t\t\t\t\t\t\t\t\t<i class=\"fa-solid fa-map-location-dot\"></i>\n\t\t\t\t\t\t\t\t\t<p class=\"location\">").concat(restaurant.location, "</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t\t<p>").concat(averageRating, "</p>\n\t\t\t\t\t\t\t\t<img src=").concat(_star.default, " class=\"star-img\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<p>").concat(restaurant.infoShort, "</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</a>\n\t\t\t\t");
-        restaurantModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(restaurant.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(restaurant.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(restaurant.link, ">").concat(restaurant.link, "</a>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t").concat(renderComments(restaurant.comments), "\n\t\t\t\t\t\t\t").concat(renderNewCommentInput(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
+        restaurantModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(restaurant.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(restaurant.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(restaurant.link, ">").concat(restaurant.link, "</a>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t").concat(renderComments(restaurant.comments), "\n\t\t\t\t\t\t\t").concat(renderNewCommentInput(restaurant.id), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
         restaurantsContainer.appendChild(restaurantDiv);
         restaurantsContainer.appendChild(restaurantModal);
         var addCommentButton = restaurantModal.querySelector('#add-comment-button');
@@ -59065,45 +59656,62 @@ function renderRestaurants() {
     }
     return starImagesHTML;
   }
-  function updateRating(restaurantId, rating, ratingContainer) {
-    var restaurantRef = _firebase.firestore.collection('restaurants').doc(restaurantId);
-    var user = JSON.parse(localStorage.getItem('user'));
-    var userId = user ? user.uid : null;
-    if (!userId) {
-      console.error('User not logged in!');
-      return;
-    }
-    var userRatingRef = _firebase.firestore.collection('users').doc(userId);
-    var restaurantRatings;
-    var userRatings;
-    restaurantRef.get().then(function (doc) {
-      if (doc.exists) {
-        restaurantRatings = doc.data().rating || [];
-      } else {
-        console.error('restaurant document does not exist!');
-        return;
-      }
-      return userRatingRef.get();
-    }).then(function (doc) {
-      if (doc.exists) {
-        userRatings = doc.data()["restaurants-".concat(restaurantId)] || [];
-      } else {
-        console.error('User document does not exist!');
-        return;
-      }
-      restaurantRatings.push(rating);
-      userRatings.push(rating);
-      return Promise.all([restaurantRef.update({
-        rating: restaurantRatings
-      }), userRatingRef.update(_defineProperty({}, "restaurants-".concat(restaurantId), userRatings))]);
-    }).then(function () {
-      console.log('Rating updated successfully for both restaurant and user!');
-      if (ratingContainer) {
-        ratingContainer.innerHTML = 'Thank you for your vote!';
-      }
-    }).catch(function (error) {
-      console.error('Error updating rating:', error);
-    });
+  function updateRating(_x, _x2, _x3) {
+    return _updateRating.apply(this, arguments);
+  }
+  function _updateRating() {
+    _updateRating = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(restaurantId, rating, ratingContainer) {
+      var user, userId, restaurantRef, restaurantDoc, restaurantRating;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            user = JSON.parse(localStorage.getItem('user'));
+            userId = user ? user.uid : null;
+            if (userId) {
+              _context.next = 6;
+              break;
+            }
+            console.error('User not logged in!');
+            return _context.abrupt("return");
+          case 6:
+            console.log(restaurantId);
+            restaurantRef = _firebase.firestore.collection('restaurants').doc(restaurantId);
+            _context.next = 10;
+            return restaurantRef.get();
+          case 10:
+            restaurantDoc = _context.sent;
+            if (restaurantDoc.exists) {
+              _context.next = 14;
+              break;
+            }
+            console.error('Restaurant document does not exist!');
+            return _context.abrupt("return");
+          case 14:
+            restaurantRating = restaurantDoc.data().rating || [];
+            restaurantRating.push(rating);
+            _context.next = 18;
+            return Promise.all([restaurantRef.update({
+              rating: restaurantRating
+            })]);
+          case 18:
+            console.log('Rating updated successfully for restaurant!');
+            if (ratingContainer) {
+              ratingContainer.innerHTML = 'Thank you for your vote!';
+            }
+            _context.next = 25;
+            break;
+          case 22:
+            _context.prev = 22;
+            _context.t0 = _context["catch"](0);
+            console.error('Error updating rating:', _context.t0);
+          case 25:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[0, 22]]);
+    }));
+    return _updateRating.apply(this, arguments);
   }
   function calculateAverageRating(ratings) {
     if (ratings.length === 0) return "-";
@@ -59132,7 +59740,7 @@ function renderRestaurants() {
     if (user) {
       username = user.displayName || user.email;
     }
-    var commentInput = document.getElementById('comment');
+    var commentInput = document.getElementById("comment-".concat(restaurantName));
     if (username && commentInput) {
       var commentText = commentInput.value.trim();
       commentInput.value = '';
@@ -59157,8 +59765,8 @@ function renderRestaurants() {
       }
     }
   }
-  function renderNewCommentInput() {
-    return "\n\t\t\t<div class=\"new-comment\">\n\t\t\t\t<input type=\"text\" id=\"comment\" placeholder=\"Write a comment...\">\n\t\t\t\t<button id=\"add-comment-button\">Add Comment</button>\n\t\t\t</div>\n\t\t";
+  function renderNewCommentInput(restaurantName) {
+    return "\n\t\t\t<div class=\"new-comment\">\n\t\t\t\t<input type=\"text\" id=\"comment-".concat(restaurantName, "\" placeholder=\"Write a comment...\">\n\t\t\t\t<button id=\"add-comment-button\">Add Comment</button>\n\t\t\t</div>\n\t\t");
   }
 
   /* FILTER */
@@ -59346,22 +59954,54 @@ function renderForgottenPwdFormOnClick(event) {
 function renderMainMenuOnClick() {
   (0, _mainMenu.renderMainMenuForm)();
 }
-},{"./firebase":"js/firebase.js","./newUser.js":"js/newUser.js","./forgottenPwd.js":"js/forgottenPwd.js","./mainMenu":"js/mainMenu.js"}],"js/index.js":[function(require,module,exports) {
+},{"./firebase":"js/firebase.js","./newUser.js":"js/newUser.js","./forgottenPwd.js":"js/forgottenPwd.js","./mainMenu":"js/mainMenu.js"}],"js/notVerified.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.renderNotVerified = renderNotVerified;
+var _loginForm = require("./loginForm.js");
+function renderNotVerified() {
+  var appDiv = document.getElementById('app');
+  var notVerifiedHTML = "\n\t\t<div class=\"not-verified-container\">\n\t\t\t<div class=\"not-verified-box\">\n\t\t\t\t<h2>Bruker er ikke verifisert</h2>\n\t\t\t\t<p>\n\t\t\t\t\tDu har f\xE5tt tilsendt en e-post for verifisering. \n\t\t\t\t\tVennligst verifiser brukeren og last inn siden p\xE5 nytt. \n\t\t\t\t</p>\n\t\t\t\t<button id=\"logoutBtn\">Logg ut</button>\n\t\t\t</div>\n\t\t</div>\n    ";
+  appDiv.innerHTML = notVerifiedHTML;
+  var logoutBtn = document.getElementById('logoutBtn');
+  logoutBtn.addEventListener('click', handleLogout);
+}
+function handleLogout() {
+  // Remove user from localStorage
+  localStorage.removeItem('user');
+
+  // Render the login form
+  (0, _loginForm.renderLoginForm)();
+}
+},{"./loginForm.js":"js/loginForm.js"}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
 var _loginForm = require("./loginForm.js");
 var _mainMenu = require("./mainMenu");
+var _notVerified = require("./notVerified.js");
+var _firebase = require("./firebase.js");
+var _auth = require("firebase/auth");
 document.addEventListener('DOMContentLoaded', function () {
   var user = JSON.parse(localStorage.getItem('user'));
-  if (user) {
-    // If there is a valid user in local storage, render the main menu
-    (0, _mainMenu.renderMainMenuForm)();
-  } else {
-    // If there is no valid user in local storage, render the login form
-    (0, _loginForm.renderLoginForm)();
-  }
+  (0, _auth.onAuthStateChanged)(_firebase.auth, function (firebaseUser) {
+    if (firebaseUser) {
+      // User is signed in
+      if (firebaseUser.emailVerified) {
+        localStorage.setItem('user', JSON.stringify(firebaseUser));
+        (0, _mainMenu.renderMainMenuForm)();
+      } else {
+        (0, _notVerified.renderNotVerified)();
+      }
+    } else {
+      // No user is signed in
+      (0, _loginForm.renderLoginForm)();
+    }
+  });
 });
-},{"./loginForm.js":"js/loginForm.js","./mainMenu":"js/mainMenu.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./loginForm.js":"js/loginForm.js","./mainMenu":"js/mainMenu.js","./notVerified.js":"js/notVerified.js","./firebase.js":"js/firebase.js","firebase/auth":"node_modules/firebase/auth/dist/esm/index.esm.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -59386,7 +60026,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60677" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54157" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
