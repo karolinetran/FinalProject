@@ -18,8 +18,8 @@ export function renderCafees() {
 				<form id="filter">
 					<p>Servering</p>
 					<div>
-						<input class="filter-checkbox-inout" id="innservering" type="checkbox">
-						<label for="innservering">Inneservering</label>
+						<input class="filter-checkbox-inout" id="inneservering" type="checkbox">
+						<label for="inneservering">Inneservering</label>
 					</div>
 					<div>
 						<input class="filter-checkbox-inout" id="uteservering" type="checkbox">
@@ -138,12 +138,16 @@ export function renderCafees() {
 							<h2>${cafe.name} <span> - ${averageRating} <img src=${startImg} class="star-img"></span></h2>
 							<p>${cafe.info}</p>
 							<a class="modal-link" href=${cafe.link}>${cafe.link}</a>
+							<div>
+								${cafe.inneservering ? '<span class="info-tag">Inneservering</span>' : ''}
+								${cafe.uteservering ? '<span class="info-tag">Uteservering</span>' : ''}
+							</div>
 							<div class="rating-container">
-							${generateStarImages()}
+								${generateStarImages()}
 							</div>
 							<div class="comments-container">
-							${renderComments(cafe.comments)}
-							${renderNewCommentInput(cafe.id)}
+								${renderComments(cafe.comments)}
+								${renderNewCommentInput(cafe.id)}
 							</div>
 						</div>
 					</div>
@@ -229,9 +233,6 @@ export function renderCafees() {
 			console.error('Error updating rating:', error);
 		}
 	}
-	
-	
-	
 
 	function calculateAverageRating(ratings) {
 		if (ratings.length === 0) return "-"; 
@@ -258,7 +259,6 @@ export function renderCafees() {
 		if (user) {
 			username = user.displayName || user.email;
 		}
-		console.log(cafeName)
 		const commentInput = document.getElementById(`comment-${cafeName}`);
 		
 		if (username && commentInput) {
@@ -291,7 +291,6 @@ export function renderCafees() {
 	}
 	
 	function renderNewCommentInput(cafeName) {
-		console.log(cafeName)
 		return `
 			<div class="new-comment">
 				<input type="text" id='comment-${cafeName}' placeholder="Write a comment...">
@@ -302,24 +301,34 @@ export function renderCafees() {
 
 	/* FILTER */
 	function isCafeMatchingFilters(cafe) {
-		const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
-		let anyChecked = false;
-	
-		for (let checkbox of filterCheckboxes) {
-			if (checkbox.checked && cafe.location === checkbox.id) {
-				return true;
-			}
+		const locationCheckboxes = document.querySelectorAll('.filter-checkbox');
+		const inneserveringCheckbox = document.getElementById('inneservering');
+		const uteserveringCheckbox = document.getElementById('uteservering');
+		
+		let locationChecked = false;
+		let locationMatch = false;
+		
+		for (let checkbox of locationCheckboxes) {
 			if (checkbox.checked) {
-				anyChecked = true;
+				locationChecked = true;
+				if (cafe.location === checkbox.id) {
+					locationMatch = true;
+					break;
+				}
 			}
 		}
+		
+		
+		const inneserveringMatch = !inneserveringCheckbox || !inneserveringCheckbox.checked || cafe.inneservering;
+		const uteserveringMatch = !uteserveringCheckbox || !uteserveringCheckbox.checked || cafe.uteservering;
 	
-		if (!anyChecked) {
-			return true;
+		if (!locationChecked) {
+			return inneserveringMatch && uteserveringMatch;
 		}
 	
-		return false;
+		return locationMatch && inneserveringMatch && uteserveringMatch;
 	}
+	
 
 	/* FETCH FIREBASE */
 	function fetchImages(cafeNames) {
@@ -343,7 +352,7 @@ export function renderCafees() {
 		})
 		.then(({ cafees, images }) => {
 			displaycafees(cafees, images); 
-			const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
+			const filterCheckboxes = document.querySelectorAll('.filter-checkbox, .filter-checkbox-inout');
 			filterCheckboxes.forEach(checkbox => {
 				checkbox.addEventListener('change', () => {
 					displaycafees(cafees, images);

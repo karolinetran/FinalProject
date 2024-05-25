@@ -3,141 +3,12 @@ body {
 	margin:0;
 }
 
-/* Login page */
-.login-page{
-	height:95vh;
-	background-size: cover;
-	background-position: 75% 75%;
-}
-
-.login-page-header{
-	text-align: center;
-	padding:1em;
-	background:rgba(255, 255, 255, 0.5);
-	margin-bottom:0;
-}
-
-.login-page-info{
-	margin-top:0;
-	width: 100%;
-	background:rgba(255, 255, 255, 0.5)
-}
-
-.login-page-info p{
-	margin:auto;
-	padding-bottom:1em;
-	margin-top:0;
-	width:50%;
-}
-
-.login-container {
-    width: 300px;
-    margin: auto;
-	margin-top:20px;
-    padding: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 10px 10px;
-	background:rgba(255, 255, 255, 0.9)
-}
-
-.login-container a{
-	font-size: small;
-}
-
-.input-group {
-    margin-bottom: 20px;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.input-group input {
-    width: 90%;
-    padding: 5% 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-	margin-left:70%;
-}
-
-.btn:hover {
-    background-color: #0056b3;
-}
-
-#forgottenPwdLink{
-    width:fit-content;
-    padding:0.1em;
-}
-
-#newUserLink{
-    width: fit-content;
-    padding:0.1em;
-}
-
-#forgottenPwdLink:hover{
-    cursor:pointer;
-    background: #007bff;
-}
-
-#newUserLink:hover{
-    cursor: pointer;
-    background:#007bff;
-}
-
-/* Forgotten Pwd */
-
-.forgotten-pwd-page{
-    margin-top:2em;
-    width:50%;
-    margin-left:25%;
-    padding:0.5em;
-}
-
-#back-btn{
-    margin-left:-20%;
-    width:fit-content;
-}
-#back-btn:hover{
-    background: #007bff;
-    cursor:pointer;
-}
-
-/* New User*/
-
-.new-user-page{
-    margin-top:2em;
-    width:50%;
-    margin-left:25%;
-    padding:0.5em;
-}
-
-#back-btn{
-    margin-left:-20%;
-    width:fit-content;
-}
-#back-btn:hover{
-    background: #007bff;
-    cursor:pointer;
-}
-
-/* ############### CSS FROM OLD ASSIGNMENT ########## */
-/* Main page */
 a{
 	color: inherit; 
 	text-decoration: inherit;
 }
+
+/* ####-Main landing page-####*/
 
 .header{
 	display: flex;
@@ -153,7 +24,44 @@ a{
 	font-size: xx-large;
 	letter-spacing: 0.03rem;
 }
-/* Footer on main page */
+
+/*---Main options container styling---*/
+.main-options-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	padding-top: 3%;
+}
+
+  /*---Top header---*/
+  .header-info{
+    display:flex;
+    flex-direction: row;
+    position:absolute;
+    top:0;
+    right:0;
+    padding:0.2em;
+  }
+
+  .header-info p{
+    margin:0;
+    font-size:20px;
+    margin-right:0.2em;
+  }
+
+  .header-info button{
+    border:1px solid white;
+    border-radius: 0.2em;
+    background: #9FA8A3;
+    color:white;
+  }
+
+  .header-info button:hover{
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+/*---Footer---*/
 .footer{
 	width: 90%;
 	background: #9FA8A3;
@@ -178,8 +86,9 @@ a{
 	opacity: 0.7;
 	cursor: pointer;
 }
+/*####-Secondary Pages-####*/
 
-/* Home button in the hotels, restaurants and cafees pages */
+/*---Home button in the hotels, restaurants and cafees pages---*/
 .home-btn{
 	margin-left: 2rem;
 }
@@ -188,7 +97,7 @@ a{
 	cursor: pointer;
 }
 
-/* Styling of filter menu */
+/*---Filter---*/
 .filter-and-options-container{
 	display: flex;
 	flex-direction: row;
@@ -205,15 +114,7 @@ a{
 	font-weight: bold;
 }
 
-/* Main options container for the front page */
-.main-options-container{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	padding-top: 3%;
-}
-
-/* Secondary options container for restuarants, cafees and hotels pages */
+/*---Secondary options container styling---*/
 .secondary-options-container{
 	margin:2rem;
 	display: grid;
@@ -225,7 +126,6 @@ a{
 .secondary-options-container .option-box{
 	width:100%;
 	min-height: 45vh;
-	
 }
 
 .secondary-options-container .option-box h2{
@@ -234,8 +134,7 @@ a{
 	text-decoration: none;
 }
 
-/* Option Box styling */
-
+/*---Option Box styling---*/
 
 .option-box{
 	padding:0.2rem;
@@ -305,7 +204,7 @@ padding: 0.5rem;
 	cursor: pointer;
 }
 
-/* Modal styling */
+/*---Modal styling---*/
 
 .info-modal{
 	background:rgba(0, 0, 0, 0.5);
@@ -359,8 +258,73 @@ padding: 0.5rem;
 	cursor: default;
 	z-index:2;
 }
+.info-tag{
+	padding:0.2em;
+	background:#9FA8A3;
+	display:flex;
+	width:fit-content;
+	margin-left:auto;
+	margin-top:0.1em;
+	border-radius:0.2em;
+  }
 
-/* Media query for various screensizes for responsive design */
+  /*---Rating---*/
+  .star-img{
+    height:20px;
+    width:auto;
+  }
+
+  .star-img-user{
+    height:20px;
+    width:auto;
+    opacity:0.4;
+  }
+
+ .star-img-user:hover,
+ .star-img-user:hover + .star-img-user,
+ .star-img-user:hover + .star-img-user + .star-img-user,
+ .star-img-user:hover + .star-img-user + .star-img-user + .star-img-user,
+ .star-img-user:hover + .star-img-user + .star-img-user + .star-img-user + .star-img-user {
+    opacity: 1;
+    cursor: pointer;
+}
+
+  .rating-container{
+    display:flex;
+    flex-direction: row;
+    padding-top:1em;
+    padding-bottom:1em;
+  }
+
+/*---Comment---*/
+  .comment{
+    padding:0.5em;
+    margin:0.2em;
+    background:#9FA8A3;
+  }
+
+  .new-comment{
+    padding:0.5em;
+    margin:0.2em;
+    display:flex;
+    justify-content: space-between;
+  }
+
+  .new-comment input{
+    width:65%;
+    padding:1em;
+  }
+
+  .new-comment button {
+    width:25%;
+    background:#9FA8A3;
+    border:1px solid white;
+    border-radius: 0.4em;
+    padding:1em;
+  }
+
+
+/*---Media query for various screensizes for responsive design---*/
 @media only screen and (max-width: 1000px) {
 	.secondary-options-container{
 		grid-template-columns: repeat(2, 1fr);
@@ -397,108 +361,6 @@ padding: 0.5rem;
 		height:fit-content;
 		align-items: center;
 	}
-  }
-
-  /* Top header */
-
-  .header-info{
-    display:flex;
-    flex-direction: row;
-    position:absolute;
-    top:0;
-    right:0;
-    padding:0.2em;
-  }
-
-  .header-info p{
-    margin:0;
-    font-size:20px;
-    margin-right:0.2em;
-  }
-
-  .header-info button{
-    border:1px solid white;
-    border-radius: 0.2em;
-    background: #9FA8A3;
-    color:white;
-  }
-
-  .header-info button:hover{
-    cursor: pointer;
-    opacity: 0.8;
-  }
-
-  /*Rating*/
-  .star-img{
-    height:20px;
-    width:auto;
-  }
-
-  .star-img-user{
-    height:20px;
-    width:auto;
-    opacity:0.4;
-  }
-
- .star-img-user:hover,
- .star-img-user:hover + .star-img-user,
- .star-img-user:hover + .star-img-user + .star-img-user,
- .star-img-user:hover + .star-img-user + .star-img-user + .star-img-user,
- .star-img-user:hover + .star-img-user + .star-img-user + .star-img-user + .star-img-user {
-    opacity: 1;
-    cursor: pointer;
-}
-
-  .rating-container{
-    display:flex;
-    flex-direction: row;
-    padding-top:1em;
-    padding-bottom:1em;
-  }
-
-  /*Comment*/
-  .comment{
-    padding:0.5em;
-    margin:0.2em;
-    background:#9FA8A3;
-  }
-
-  .new-comment{
-    padding:0.5em;
-    margin:0.2em;
-    display:flex;
-    justify-content: space-between;
-  }
-
-  .new-comment input{
-    width:65%;
-    padding:1em;
-  }
-
-  .new-comment button {
-    width:25%;
-    background:#9FA8A3;
-    border:1px solid white;
-    border-radius: 0.4em;
-    padding:1em;
-  }
-
-  /*Not verified*/
-
-  .not-verified-container{
-	background:rgba(0, 0, 0, 0.4);
-	height:100vh;
-	margin:0;
-	padding:10% 20%;
-  }
-
-  .not-verified-box{
-	display:flex;
-	flex-direction: column;
-	align-items: center;
-	background: #9FA8A3;
-	padding:20% 15%;
-	border-radius: 0.4em;
   }
 
 /*# sourceMappingURL=/style.78032849.css.map */

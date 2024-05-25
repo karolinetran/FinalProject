@@ -18,8 +18,8 @@ export function renderRestaurants() {
 				<form id="filter">
 					<p>Servering</p>
 					<div>
-						<input class="filter-checkbox-inout" id="innservering" type="checkbox">
-						<label for="innservering">Inneservering</label>
+						<input class="filter-checkbox-inout" id="inneservering" type="checkbox">
+						<label for="inneservering">Inneservering</label>
 					</div>
 					<div>
 						<input class="filter-checkbox-inout" id="uteservering" type="checkbox">
@@ -139,6 +139,10 @@ export function renderRestaurants() {
 							<h2>${restaurant.name} <span> - ${averageRating} <img src=${startImg} class="star-img"></span></h2>
 							<p>${restaurant.info}</p>
 							<a class="modal-link" href=${restaurant.link}>${restaurant.link}</a>
+							<div>
+								${restaurant.inneservering ? '<span class="info-tag">Inneservering</span>' : ''}
+								${restaurant.uteservering ? '<span class="info-tag">Uteservering</span>' : ''}
+							</div>
 							<div class="rating-container">
 							${generateStarImages()}
 							</div>
@@ -303,22 +307,32 @@ export function renderRestaurants() {
 
 	/* FILTER */
 	function isRestaurantMatchingFilters(restaurant) {
-		const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
-		let anyChecked = false;
-	
-		for (let checkbox of filterCheckboxes) {
-			if (checkbox.checked && restaurant.location === checkbox.id) {
-				return true;
-			}
+		const locationCheckboxes = document.querySelectorAll('.filter-checkbox');
+		const inneserveringCheckbox = document.getElementById('inneservering');
+		const uteserveringCheckbox = document.getElementById('uteservering');
+		
+		let locationChecked = false;
+		let locationMatch = false;
+		
+		for (let checkbox of locationCheckboxes) {
 			if (checkbox.checked) {
-				anyChecked = true;
+				locationChecked = true;
+				if (restaurant.location === checkbox.id) {
+					locationMatch = true;
+					break;
+				}
 			}
 		}
-		if (!anyChecked) {
-			return true;
+		
+		
+		const inneserveringMatch = !inneserveringCheckbox || !inneserveringCheckbox.checked || restaurant.inneservering;
+		const uteserveringMatch = !uteserveringCheckbox || !uteserveringCheckbox.checked || restaurant.uteservering;
+	
+		if (!locationChecked) {
+			return inneserveringMatch && uteserveringMatch;
 		}
 	
-		return false;
+		return locationMatch && inneserveringMatch && uteserveringMatch;
 	}
 
 	/* FETCH FIREBASE */
@@ -343,7 +357,7 @@ export function renderRestaurants() {
 		})
 		.then(({ restaurants, images }) => {
 			displayRestaurants(restaurants, images); 
-			const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
+			const filterCheckboxes = document.querySelectorAll('.filter-checkbox, .filter-checkbox-inout');
 			filterCheckboxes.forEach(checkbox => {
 				checkbox.addEventListener('change', () => {
 					displayRestaurants(restaurants, images);

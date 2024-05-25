@@ -1,3 +1,5 @@
+import '../css/loginForm.css';
+
 import { auth } from './firebase';
 
 import { renderNewUserForm } from './newUser.js';
@@ -69,7 +71,7 @@ function handleLogin() {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            alert('Invalid username or password. Please try again.');
+            alert('Feil e-post eller passord');
             console.error('Error signing in:', errorMessage);
         });
 }

@@ -1,0 +1,92 @@
+/* Login page */
+.login-page{
+	height:100vh;
+	background-size: cover;
+	background-position: 75% 75%;
+}
+
+.login-page-header{
+	text-align: center;
+	padding:1em;
+	background:rgba(255, 255, 255, 0.5);
+	margin:0;
+}
+
+.login-page-info{
+	margin-top:0;
+	width: 100%;
+	background:rgba(255, 255, 255, 0.5)
+}
+
+.login-page-info p{
+	margin:auto;
+	padding-bottom:1em;
+	margin-top:0;
+	width:50%;
+}
+
+.login-container {
+    width: 300px;
+    margin: auto;
+	margin-top:20px;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 10px 10px;
+	background:rgba(255, 255, 255, 0.9)
+}
+
+.login-container a{
+	font-size: small;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 90%;
+    padding: 5% 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+	margin-left:70%;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+#forgottenPwdLink{
+    width:fit-content;
+    padding:0.1em;
+}
+
+#newUserLink{
+    width: fit-content;
+    padding:0.1em;
+}
+
+#forgottenPwdLink:hover{
+    cursor:pointer;
+    background: #007bff;
+}
+
+#newUserLink:hover{
+    cursor: pointer;
+    background:#007bff;
+}

@@ -1,4 +1,6 @@
 // forgottenPwd.js
+import '../css/forgottenPwd.css';
+
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { renderLoginForm } from './loginForm.js';
 import { auth } from './firebase.js';
@@ -10,13 +12,15 @@ export function renderForgottenPwdForm() {
     const forgottenPwdFormHTML = `
         <div class="forgotten-pwd-page">
 			<p id="back-btn">Tilbake</p>
-            <h2>Glemt Passord</h2>
-            <p>Skriv inn eposten din for å få tilsendt tilsendt nytt passord</p>
-            <div class="input-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="Skriv inn e-mail">
+            <div class="forgotten-pwd-form">
+                <h2>Glemt Passord</h2>
+                <p>Skriv inn eposten din for å få tilsendt tilsendt nytt passord</p>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Skriv inn e-mail">
+                </div>
+                <button class="btn" id="resetPwdBtn">Tilbakestill passord</button>
             </div>
-            <button class="btn" id="resetPwdBtn">Tilbakestill passord</button>
         </div>
     `;
 
@@ -41,7 +45,7 @@ function handleResetPassword() {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.error('Error sending password reset email:', errorMessage);
-            alert(`Error sending password reset email: ${errorMessage}`);
+            alert(`Det skjedde en feil: ${errorMessage}`);
         });
 }
 

@@ -117,7 +117,62 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"node_modules/process/browser.js":[function(require,module,exports) {
+})({"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+  return bundleURL;
+}
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+  return '/';
+}
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+    cssTimeout = null;
+  }, 50);
+}
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"css/loginForm.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -58397,7 +58452,11 @@ var firebaseApp = _app.default.initializeApp(firebaseConfig);
 var auth = exports.auth = firebaseApp.auth();
 var firestore = exports.firestore = _app.default.firestore();
 var storage = exports.storage = firebaseApp.storage();
-},{"firebase/compat/app":"node_modules/firebase/compat/app/dist/esm/index.esm.js","firebase/compat/auth":"node_modules/firebase/compat/auth/dist/esm/index.esm.js","firebase/compat/firestore":"node_modules/firebase/compat/firestore/dist/esm/index.esm.js","firebase/compat/storage":"node_modules/firebase/compat/storage/dist/esm/index.esm.js"}],"node_modules/@firebase/auth/dist/esm2017/index.js":[function(require,module,exports) {
+},{"firebase/compat/app":"node_modules/firebase/compat/app/dist/esm/index.esm.js","firebase/compat/auth":"node_modules/firebase/compat/auth/dist/esm/index.esm.js","firebase/compat/firestore":"node_modules/firebase/compat/firestore/dist/esm/index.esm.js","firebase/compat/storage":"node_modules/firebase/compat/storage/dist/esm/index.esm.js"}],"css/newUser.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/@firebase/auth/dist/esm2017/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -58937,6 +58996,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.renderNewUserForm = renderNewUserForm;
+require("../css/newUser.css");
 var _firebase = require("./firebase");
 var _auth = require("firebase/auth");
 var _loginForm = require("./loginForm.js");
@@ -58944,7 +59004,7 @@ var _loginForm = require("./loginForm.js");
 
 function renderNewUserForm() {
   var appDiv = document.getElementById('app');
-  var newUserFormHTML = "\n    <div class=\"new-user-page\">\n\t\t<p id=\"back-btn\">Tilbake</p>\n        <h2>Ny bruker</h2>\n        <div class=\"input-group\">\n            <label for=\"firstName\">Fornavn:</label>\n            <input type=\"text\" id=\"firstName\" placeholder=\"Jan\">\n        </div>\n        <div class=\"input-group\">\n            <label for=\"lastName\">Etternavn:</label>\n            <input type=\"text\" id=\"lastName\" placeholder=\"Johansen\">\n        </div>\n        <div class=\"input-group\">\n            <label for=\"email\">Email:</label>\n            <input type=\"email\" id=\"email\" placeholder=\"jan.johansen@gmail.com\">\n        </div>\n        <div class=\"input-group\">\n            <label for=\"password\">Passord:</label>\n            <input type=\"password\" id=\"password\" placeholder=\"Fyll ut et passord...\">\n        </div>\n        <button class=\"btn\" id=\"signupBtn\">Sign Up</button>\n    </div>\n    ";
+  var newUserFormHTML = "\n    <div class=\"new-user-page\">\n\t\t<p id=\"back-btn\">Tilbake</p>\n        <div class=\"new-user-form\">\n            <h2>Ny bruker</h2>\n            <div class=\"input-group\">\n                <label for=\"firstName\">Fornavn:</label>\n                <input type=\"text\" id=\"firstName\" placeholder=\"Jan\">\n            </div>\n            <div class=\"input-group\">\n                <label for=\"lastName\">Etternavn:</label>\n                <input type=\"text\" id=\"lastName\" placeholder=\"Johansen\">\n            </div>\n            <div class=\"input-group\">\n                <label for=\"email\">Email:</label>\n                <input required type=\"email\" id=\"email\" placeholder=\"jan.johansen@gmail.com\">\n            </div>\n            <div class=\"input-group\">\n                <label for=\"password\">Passord:</label>\n                <input required type=\"password\" id=\"password\" placeholder=\"Fyll ut et passord...\">\n            </div>\n            <button class=\"btn\" id=\"signupBtn\">Lag bruker</button>\n        </div>\n    </div>\n    ";
   appDiv.innerHTML = newUserFormHTML;
   var signupBtn = document.getElementById('signupBtn');
   signupBtn.addEventListener('click', handleSignUp);
@@ -58978,20 +59038,25 @@ function handleSignUp() {
     var errorMessage = error.message;
     console.error('Error signing up:', errorMessage);
     // Optionally, display error messages to the user
-    alert("Error signing up: ".concat(errorMessage));
+    alert("Det skjedde en feil: ".concat(errorMessage));
   });
 }
 function backBtnClick(event) {
   event.preventDefault();
   (0, _loginForm.renderLoginForm)();
 }
-},{"./firebase":"js/firebase.js","firebase/auth":"node_modules/firebase/auth/dist/esm/index.esm.js","./loginForm.js":"js/loginForm.js"}],"js/forgottenPwd.js":[function(require,module,exports) {
+},{"../css/newUser.css":"css/newUser.css","./firebase":"js/firebase.js","firebase/auth":"node_modules/firebase/auth/dist/esm/index.esm.js","./loginForm.js":"js/loginForm.js"}],"css/forgottenPwd.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"js/forgottenPwd.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.renderForgottenPwdForm = renderForgottenPwdForm;
+require("../css/forgottenPwd.css");
 var _auth = require("firebase/auth");
 var _loginForm = require("./loginForm.js");
 var _firebase = require("./firebase.js");
@@ -58999,7 +59064,7 @@ var _firebase = require("./firebase.js");
 
 function renderForgottenPwdForm() {
   var appDiv = document.getElementById('app');
-  var forgottenPwdFormHTML = "\n        <div class=\"forgotten-pwd-page\">\n\t\t\t<p id=\"back-btn\">Tilbake</p>\n            <h2>Glemt Passord</h2>\n            <p>Skriv inn eposten din for \xE5 f\xE5 tilsendt tilsendt nytt passord</p>\n            <div class=\"input-group\">\n                <label for=\"email\">Email:</label>\n                <input type=\"email\" id=\"email\" placeholder=\"Skriv inn e-mail\">\n            </div>\n            <button class=\"btn\" id=\"resetPwdBtn\">Tilbakestill passord</button>\n        </div>\n    ";
+  var forgottenPwdFormHTML = "\n        <div class=\"forgotten-pwd-page\">\n\t\t\t<p id=\"back-btn\">Tilbake</p>\n            <div class=\"forgotten-pwd-form\">\n                <h2>Glemt Passord</h2>\n                <p>Skriv inn eposten din for \xE5 f\xE5 tilsendt tilsendt nytt passord</p>\n                <div class=\"input-group\">\n                    <label for=\"email\">Email:</label>\n                    <input type=\"email\" id=\"email\" placeholder=\"Skriv inn e-mail\">\n                </div>\n                <button class=\"btn\" id=\"resetPwdBtn\">Tilbakestill passord</button>\n            </div>\n        </div>\n    ";
   appDiv.innerHTML = forgottenPwdFormHTML;
   var resetPwdBtn = document.getElementById('resetPwdBtn');
   resetPwdBtn.addEventListener('click', handleResetPassword);
@@ -59015,14 +59080,14 @@ function handleResetPassword() {
     var errorCode = error.code;
     var errorMessage = error.message;
     console.error('Error sending password reset email:', errorMessage);
-    alert("Error sending password reset email: ".concat(errorMessage));
+    alert("Det skjedde en feil: ".concat(errorMessage));
   });
 }
 function backBtnClick(event) {
   event.preventDefault();
   (0, _loginForm.renderLoginForm)();
 }
-},{"firebase/auth":"node_modules/firebase/auth/dist/esm/index.esm.js","./loginForm.js":"js/loginForm.js","./firebase.js":"js/firebase.js"}],"assets/imgs/restaurants.jpg":[function(require,module,exports) {
+},{"../css/forgottenPwd.css":"css/forgottenPwd.css","firebase/auth":"node_modules/firebase/auth/dist/esm/index.esm.js","./loginForm.js":"js/loginForm.js","./firebase.js":"js/firebase.js"}],"assets/imgs/restaurants.jpg":[function(require,module,exports) {
 module.exports = "/restaurants.b0339adb.jpg";
 },{}],"assets/imgs/cafees.jpg":[function(require,module,exports) {
 module.exports = "/cafees.dd9f69c7.jpg";
@@ -59060,7 +59125,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function renderCafees() {
   var appDiv = document.getElementById('app');
-  var cafeesHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Servering</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"innservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"innservering\">Inneservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"uteservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"uteservering\">Uteservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"cafees-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
+  var cafeesHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Servering</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"inneservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"inneservering\">Inneservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"uteservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"uteservering\">Uteservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"cafees-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
   appDiv.innerHTML = cafeesHTML;
   var cafeesContainer = document.getElementById('cafees-container');
   function displaycafees(cafees, images) {
@@ -59075,7 +59140,7 @@ function renderCafees() {
         var imageSrc = images[index];
         var averageRating = calculateAverageRating(cafe.rating);
         cafeDiv.innerHTML = "\n\t\t\t\t\t<a href=\"#".concat(cafe.name, "\">\n\t\t\t\t\t\t<img src=").concat(imageSrc, " class=\"option-box-img\">\n\t\t\t\t\t\t<div class=\"option-box-info-container\">\n\t\t\t\t\t\t\t<div class=\"title-location-container\">\n\t\t\t\t\t\t\t\t<h2>").concat(cafe.name, "</h2>\n\t\t\t\t\t\t\t\t<div class=\"location-with-icon\">\n\t\t\t\t\t\t\t\t\t<i class=\"fa-solid fa-map-location-dot\"></i>\n\t\t\t\t\t\t\t\t\t<p class=\"location\">").concat(cafe.location, "</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t\t<p>").concat(averageRating, "</p>\n\t\t\t\t\t\t\t\t<img src=").concat(_star.default, " class=\"star-img\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<p>").concat(cafe.infoShort, "</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</a>\n\t\t\t\t");
-        cafeModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(cafe.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(cafe.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(cafe.link, ">").concat(cafe.link, "</a>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t").concat(renderComments(cafe.comments), "\n\t\t\t\t\t\t\t").concat(renderNewCommentInput(cafe.id), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
+        cafeModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(cafe.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(cafe.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(cafe.link, ">").concat(cafe.link, "</a>\n\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t").concat(cafe.inneservering ? '<span class="info-tag">Inneservering</span>' : '', "\n\t\t\t\t\t\t\t\t").concat(cafe.uteservering ? '<span class="info-tag">Uteservering</span>' : '', "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t\t").concat(renderComments(cafe.comments), "\n\t\t\t\t\t\t\t\t").concat(renderNewCommentInput(cafe.id), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
         cafeesContainer.appendChild(cafeDiv);
         cafeesContainer.appendChild(cafeModal);
         var addCommentButton = cafeModal.querySelector('#add-comment-button');
@@ -59201,7 +59266,6 @@ function renderCafees() {
     if (user) {
       username = user.displayName || user.email;
     }
-    console.log(cafeName);
     var commentInput = document.getElementById("comment-".concat(cafeName));
     if (username && commentInput) {
       var commentText = commentInput.value.trim();
@@ -59228,24 +59292,27 @@ function renderCafees() {
     }
   }
   function renderNewCommentInput(cafeName) {
-    console.log(cafeName);
     return "\n\t\t\t<div class=\"new-comment\">\n\t\t\t\t<input type=\"text\" id='comment-".concat(cafeName, "' placeholder=\"Write a comment...\">\n\t\t\t\t<button id=\"add-comment-button\">Add Comment</button>\n\t\t\t</div>\n\t\t");
   }
 
   /* FILTER */
   function isCafeMatchingFilters(cafe) {
-    var filterCheckboxes = document.querySelectorAll('.filter-checkbox');
-    var anyChecked = false;
-    var _iterator = _createForOfIteratorHelper(filterCheckboxes),
+    var locationCheckboxes = document.querySelectorAll('.filter-checkbox');
+    var inneserveringCheckbox = document.getElementById('inneservering');
+    var uteserveringCheckbox = document.getElementById('uteservering');
+    var locationChecked = false;
+    var locationMatch = false;
+    var _iterator = _createForOfIteratorHelper(locationCheckboxes),
       _step;
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var checkbox = _step.value;
-        if (checkbox.checked && cafe.location === checkbox.id) {
-          return true;
-        }
         if (checkbox.checked) {
-          anyChecked = true;
+          locationChecked = true;
+          if (cafe.location === checkbox.id) {
+            locationMatch = true;
+            break;
+          }
         }
       }
     } catch (err) {
@@ -59253,10 +59320,12 @@ function renderCafees() {
     } finally {
       _iterator.f();
     }
-    if (!anyChecked) {
-      return true;
+    var inneserveringMatch = !inneserveringCheckbox || !inneserveringCheckbox.checked || cafe.inneservering;
+    var uteserveringMatch = !uteserveringCheckbox || !uteserveringCheckbox.checked || cafe.uteservering;
+    if (!locationChecked) {
+      return inneserveringMatch && uteserveringMatch;
     }
-    return false;
+    return locationMatch && inneserveringMatch && uteserveringMatch;
   }
 
   /* FETCH FIREBASE */
@@ -59284,7 +59353,7 @@ function renderCafees() {
     var cafees = _ref.cafees,
       images = _ref.images;
     displaycafees(cafees, images);
-    var filterCheckboxes = document.querySelectorAll('.filter-checkbox');
+    var filterCheckboxes = document.querySelectorAll('.filter-checkbox, .filter-checkbox-inout');
     filterCheckboxes.forEach(function (checkbox) {
       checkbox.addEventListener('change', function () {
         displaycafees(cafees, images);
@@ -59598,7 +59667,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function renderRestaurants() {
   var appDiv = document.getElementById('app');
-  var restaurantsHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Servering</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"innservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"innservering\">Inneservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"uteservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"uteservering\">Uteservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"restaurants-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
+  var restaurantsHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Servering</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"inneservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"inneservering\">Inneservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"uteservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"uteservering\">Uteservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"restaurants-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
   appDiv.innerHTML = restaurantsHTML;
   var restaurantsContainer = document.getElementById('restaurants-container');
   function displayRestaurants(restaurants, images) {
@@ -59613,7 +59682,7 @@ function renderRestaurants() {
         var imageSrc = images[index];
         var averageRating = calculateAverageRating(restaurant.rating);
         restaurantDiv.innerHTML = "\n\t\t\t\t\t<a href=\"#".concat(restaurant.name, "\">\n\t\t\t\t\t\t<img src=").concat(imageSrc, " class=\"option-box-img\">\n\t\t\t\t\t\t<div class=\"option-box-info-container\">\n\t\t\t\t\t\t\t<div class=\"title-location-container\">\n\t\t\t\t\t\t\t\t<h2>").concat(restaurant.name, "</h2>\n\t\t\t\t\t\t\t\t<div class=\"location-with-icon\">\n\t\t\t\t\t\t\t\t\t<i class=\"fa-solid fa-map-location-dot\"></i>\n\t\t\t\t\t\t\t\t\t<p class=\"location\">").concat(restaurant.location, "</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t\t<p>").concat(averageRating, "</p>\n\t\t\t\t\t\t\t\t<img src=").concat(_star.default, " class=\"star-img\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<p>").concat(restaurant.infoShort, "</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</a>\n\t\t\t\t");
-        restaurantModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(restaurant.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(restaurant.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(restaurant.link, ">").concat(restaurant.link, "</a>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t").concat(renderComments(restaurant.comments), "\n\t\t\t\t\t\t\t").concat(renderNewCommentInput(restaurant.id), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
+        restaurantModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(restaurant.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(restaurant.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(restaurant.link, ">").concat(restaurant.link, "</a>\n\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t").concat(restaurant.inneservering ? '<span class="info-tag">Inneservering</span>' : '', "\n\t\t\t\t\t\t\t\t").concat(restaurant.uteservering ? '<span class="info-tag">Uteservering</span>' : '', "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t").concat(renderComments(restaurant.comments), "\n\t\t\t\t\t\t\t").concat(renderNewCommentInput(restaurant.id), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
         restaurantsContainer.appendChild(restaurantDiv);
         restaurantsContainer.appendChild(restaurantModal);
         var addCommentButton = restaurantModal.querySelector('#add-comment-button');
@@ -59771,18 +59840,22 @@ function renderRestaurants() {
 
   /* FILTER */
   function isRestaurantMatchingFilters(restaurant) {
-    var filterCheckboxes = document.querySelectorAll('.filter-checkbox');
-    var anyChecked = false;
-    var _iterator = _createForOfIteratorHelper(filterCheckboxes),
+    var locationCheckboxes = document.querySelectorAll('.filter-checkbox');
+    var inneserveringCheckbox = document.getElementById('inneservering');
+    var uteserveringCheckbox = document.getElementById('uteservering');
+    var locationChecked = false;
+    var locationMatch = false;
+    var _iterator = _createForOfIteratorHelper(locationCheckboxes),
       _step;
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var checkbox = _step.value;
-        if (checkbox.checked && restaurant.location === checkbox.id) {
-          return true;
-        }
         if (checkbox.checked) {
-          anyChecked = true;
+          locationChecked = true;
+          if (restaurant.location === checkbox.id) {
+            locationMatch = true;
+            break;
+          }
         }
       }
     } catch (err) {
@@ -59790,10 +59863,12 @@ function renderRestaurants() {
     } finally {
       _iterator.f();
     }
-    if (!anyChecked) {
-      return true;
+    var inneserveringMatch = !inneserveringCheckbox || !inneserveringCheckbox.checked || restaurant.inneservering;
+    var uteserveringMatch = !uteserveringCheckbox || !uteserveringCheckbox.checked || restaurant.uteservering;
+    if (!locationChecked) {
+      return inneserveringMatch && uteserveringMatch;
     }
-    return false;
+    return locationMatch && inneserveringMatch && uteserveringMatch;
   }
 
   /* FETCH FIREBASE */
@@ -59821,7 +59896,7 @@ function renderRestaurants() {
     var restaurants = _ref.restaurants,
       images = _ref.images;
     displayRestaurants(restaurants, images);
-    var filterCheckboxes = document.querySelectorAll('.filter-checkbox');
+    var filterCheckboxes = document.querySelectorAll('.filter-checkbox, .filter-checkbox-inout');
     filterCheckboxes.forEach(function (checkbox) {
       checkbox.addEventListener('change', function () {
         displayRestaurants(restaurants, images);
@@ -59888,6 +59963,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.renderLoginForm = renderLoginForm;
+require("../css/loginForm.css");
 var _firebase = require("./firebase");
 var _newUser = require("./newUser.js");
 var _forgottenPwd = require("./forgottenPwd.js");
@@ -59939,7 +60015,7 @@ function handleLogin() {
   }).catch(function (error) {
     var errorCode = error.code;
     var errorMessage = error.message;
-    alert('Invalid username or password. Please try again.');
+    alert('Feil e-post eller passord');
     console.error('Error signing in:', errorMessage);
   });
 }
@@ -59954,13 +60030,18 @@ function renderForgottenPwdFormOnClick(event) {
 function renderMainMenuOnClick() {
   (0, _mainMenu.renderMainMenuForm)();
 }
-},{"./firebase":"js/firebase.js","./newUser.js":"js/newUser.js","./forgottenPwd.js":"js/forgottenPwd.js","./mainMenu":"js/mainMenu.js"}],"js/notVerified.js":[function(require,module,exports) {
+},{"../css/loginForm.css":"css/loginForm.css","./firebase":"js/firebase.js","./newUser.js":"js/newUser.js","./forgottenPwd.js":"js/forgottenPwd.js","./mainMenu":"js/mainMenu.js"}],"css/notVerified.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"js/notVerified.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.renderNotVerified = renderNotVerified;
+require("../css/notVerified.css");
 var _loginForm = require("./loginForm.js");
 function renderNotVerified() {
   var appDiv = document.getElementById('app');
@@ -59976,7 +60057,7 @@ function handleLogout() {
   // Render the login form
   (0, _loginForm.renderLoginForm)();
 }
-},{"./loginForm.js":"js/loginForm.js"}],"js/index.js":[function(require,module,exports) {
+},{"../css/notVerified.css":"css/notVerified.css","./loginForm.js":"js/loginForm.js"}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
 var _loginForm = require("./loginForm.js");

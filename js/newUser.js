@@ -1,7 +1,8 @@
 // newUser.js
+import '../css/newUser.css';
+
 import { auth } from './firebase';
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
-
 
 import { renderLoginForm } from './loginForm.js';
 
@@ -11,33 +12,35 @@ export function renderNewUserForm() {
     const newUserFormHTML = `
     <div class="new-user-page">
 		<p id="back-btn">Tilbake</p>
-        <h2>Ny bruker</h2>
-        <div class="input-group">
-            <label for="firstName">Fornavn:</label>
-            <input type="text" id="firstName" placeholder="Jan">
+        <div class="new-user-form">
+            <h2>Ny bruker</h2>
+            <div class="input-group">
+                <label for="firstName">Fornavn:</label>
+                <input type="text" id="firstName" placeholder="Jan">
+            </div>
+            <div class="input-group">
+                <label for="lastName">Etternavn:</label>
+                <input type="text" id="lastName" placeholder="Johansen">
+            </div>
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input required type="email" id="email" placeholder="jan.johansen@gmail.com">
+            </div>
+            <div class="input-group">
+                <label for="password">Passord:</label>
+                <input required type="password" id="password" placeholder="Fyll ut et passord...">
+            </div>
+            <button class="btn" id="signupBtn">Lag bruker</button>
         </div>
-        <div class="input-group">
-            <label for="lastName">Etternavn:</label>
-            <input type="text" id="lastName" placeholder="Johansen">
-        </div>
-        <div class="input-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="jan.johansen@gmail.com">
-        </div>
-        <div class="input-group">
-            <label for="password">Passord:</label>
-            <input type="password" id="password" placeholder="Fyll ut et passord...">
-        </div>
-        <button class="btn" id="signupBtn">Sign Up</button>
     </div>
     `;
-
+    
     appDiv.innerHTML = newUserFormHTML;
 
     const signupBtn = document.getElementById('signupBtn');
     signupBtn.addEventListener('click', handleSignUp);
 
-	const backBtn = document.getElementById('back-btn');
+    const backBtn = document.getElementById('back-btn');
     backBtn.addEventListener('click', backBtnClick);
 }
 
@@ -74,7 +77,7 @@ function handleSignUp() {
             const errorMessage = error.message;
             console.error('Error signing up:', errorMessage);
             // Optionally, display error messages to the user
-            alert(`Error signing up: ${errorMessage}`);
+            alert(`Det skjedde en feil: ${errorMessage}`);
         });
 }
 

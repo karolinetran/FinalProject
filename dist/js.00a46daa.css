@@ -1,0 +1,158 @@
+/* Login page */
+.login-page{
+	height:100vh;
+	background-size: cover;
+	background-position: 75% 75%;
+}
+
+.login-page-header{
+	text-align: center;
+	padding:1em;
+	background:rgba(255, 255, 255, 0.5);
+	margin:0;
+}
+
+.login-page-info{
+	margin-top:0;
+	width: 100%;
+	background:rgba(255, 255, 255, 0.5)
+}
+
+.login-page-info p{
+	margin:auto;
+	padding-bottom:1em;
+	margin-top:0;
+	width:50%;
+}
+
+.login-container {
+    width: 300px;
+    margin: auto;
+	margin-top:20px;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 10px 10px;
+	background:rgba(255, 255, 255, 0.9)
+}
+
+.login-container a{
+	font-size: small;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 90%;
+    padding: 5% 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+	margin-left:70%;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+#forgottenPwdLink{
+    width:fit-content;
+    padding:0.1em;
+}
+
+#newUserLink{
+    width: fit-content;
+    padding:0.1em;
+}
+
+#forgottenPwdLink:hover{
+    cursor:pointer;
+    background: #007bff;
+}
+
+#newUserLink:hover{
+    cursor: pointer;
+    background:#007bff;
+}
+/* New User*/
+
+.new-user-page{
+    margin-top:2em;
+    width:50%;
+    margin-left:25%;
+    padding:0.5em;
+}
+
+.new-user-form{
+	background:rgba(159, 168, 163,0.5);
+	border-radius:1em;
+	padding:2em;
+}
+
+#back-btn{
+    margin-left:-20%;
+    width:fit-content;
+}
+#back-btn:hover{
+    background: #007bff;
+    cursor:pointer;
+}
+
+/* Forgotten Pwd */
+
+.forgotten-pwd-page{
+    margin-top:2em;
+    width:50%;
+    margin-left:25%;
+    padding:0.5em;
+}
+
+.forgotten-pwd-form{
+	background:rgba(159, 168, 163,0.5);
+	border-radius:1em;
+	padding:2em;
+}
+
+#back-btn{
+    margin-left:-20%;
+    width:fit-content;
+}
+#back-btn:hover{
+    background: #007bff;
+    cursor:pointer;
+}
+  /*Not verified*/
+
+  .not-verified-container{
+	background:rgba(0, 0, 0, 0.4);
+	height:100vh;
+	margin:0;
+	padding:10% 20%;
+  }
+
+  .not-verified-box{
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	background: #9FA8A3;
+	padding:20% 15%;
+	border-radius: 0.4em;
+  }
+
+/*# sourceMappingURL=/js.00a46daa.css.map */

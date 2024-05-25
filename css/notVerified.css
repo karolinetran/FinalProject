@@ -1,0 +1,17 @@
+  /*Not verified*/
+
+  .not-verified-container{
+	background:rgba(0, 0, 0, 0.4);
+	height:100vh;
+	margin:0;
+	padding:10% 20%;
+  }
+
+  .not-verified-box{
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	background: #9FA8A3;
+	padding:20% 15%;
+	border-radius: 0.4em;
+  }

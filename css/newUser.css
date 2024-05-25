@@ -1,0 +1,23 @@
+/* New User*/
+
+.new-user-page{
+    margin-top:2em;
+    width:50%;
+    margin-left:25%;
+    padding:0.5em;
+}
+
+.new-user-form{
+	background:rgba(159, 168, 163,0.5);
+	border-radius:1em;
+	padding:2em;
+}
+
+#back-btn{
+    margin-left:-20%;
+    width:fit-content;
+}
+#back-btn:hover{
+    background: #007bff;
+    cursor:pointer;
+}

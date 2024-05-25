@@ -1,3 +1,4 @@
+import '../css/notVerified.css';
 import { renderLoginForm } from './loginForm.js';
 
 export function renderNotVerified() {
