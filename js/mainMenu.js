@@ -7,6 +7,8 @@ import { renderCafees } from './cafees';
 import { renderHotels } from './hotels';
 import { renderRestaurants } from './restaurants';
 
+import { getAuth, signOut } from "firebase/auth";
+
 
 export function renderMainMenuForm() {
     const appDiv = document.getElementById('app');
@@ -71,9 +73,10 @@ export function renderMainMenuForm() {
 }
 
 function handleLogout() {
-    // Remove user from localStorage
-    localStorage.removeItem('user');
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        localStorage.removeItem('user');
+        renderLoginForm();
+    })
     
-    // Render the login form
-    renderLoginForm();
 }

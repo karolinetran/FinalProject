@@ -1,4 +1,3 @@
-import firebase from './firebase'; 
 import { firestore, storage} from './firebase';
 import { renderMainMenuForm } from './mainMenu';
 
@@ -99,9 +98,10 @@ export function renderRestaurants() {
 
 	function displayRestaurants(restaurants, images) {
 		restaurantsContainer.innerHTML = ''; 
-	
+		let anyMatch = false;
 		restaurants.forEach((restaurant,index) => {
 			if (isRestaurantMatchingFilters(restaurant)) {
+				anyMatch = true;
 				const restaurantDiv = document.createElement('div');
 				const restaurantModal = document.createElement('div');
 				restaurantDiv.className = 'option-box'; 
@@ -118,7 +118,6 @@ export function renderRestaurants() {
 							<div class="title-location-container">
 								<h2>${restaurant.name}</h2>
 								<div class="location-with-icon">
-									<i class="fa-solid fa-map-location-dot"></i>
 									<p class="location">${restaurant.location}</p>
 								</div>
 							</div>
@@ -171,6 +170,10 @@ export function renderRestaurants() {
 				});
 			};
 		});
+
+		if (anyMatch==false){
+			restaurantsContainer.innerHTML = '<p>Fant ingen treff...</p>'
+		};
 
 		const starContainers = document.querySelectorAll('.rating-container');
     	starContainers.forEach(starContainer => {
@@ -229,7 +232,7 @@ export function renderRestaurants() {
 	
 			console.log('Rating updated successfully for restaurant!');
 			if (ratingContainer) {
-				ratingContainer.innerHTML = 'Thank you for your vote!';
+				ratingContainer.innerHTML = 'Takk for din vurdering!';
 			}
 		} catch (error) {
 			console.error('Error updating rating:', error);
@@ -299,8 +302,8 @@ export function renderRestaurants() {
 	function renderNewCommentInput(restaurantName) {
 		return `
 			<div class="new-comment">
-				<input type="text" id="comment-${restaurantName}" placeholder="Write a comment...">
-				<button id="add-comment-button">Add Comment</button>
+				<input type="text" id="comment-${restaurantName}" placeholder="Skriv en kommentar...">
+				<button id="add-comment-button">Legg til kommentar</button>
 			</div>
 		`;
 	}

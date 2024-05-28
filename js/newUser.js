@@ -2,7 +2,7 @@
 import '../css/newUser.css';
 
 import { auth } from './firebase';
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 
 import { renderLoginForm } from './loginForm.js';
 
@@ -24,11 +24,11 @@ export function renderNewUserForm() {
             </div>
             <div class="input-group">
                 <label for="email">Email:</label>
-                <input required type="email" id="email" placeholder="jan.johansen@gmail.com">
+                <input type="email" id="email" placeholder="jan.johansen@gmail.com">
             </div>
             <div class="input-group">
                 <label for="password">Passord:</label>
-                <input required type="password" id="password" placeholder="Fyll ut et passord...">
+                <input type="password" id="password" placeholder="Fyll ut et passord...">
             </div>
             <button class="btn" id="signupBtn">Lag bruker</button>
         </div>
@@ -49,6 +49,11 @@ function handleSignUp() {
     const lastNameInput = document.getElementById('lastName').value;
     const emailInput = document.getElementById('email').value;
     const passwordInput = document.getElementById('password').value;
+
+    if (!firstNameInput || !lastNameInput || !emailInput || !passwordInput) {
+        alert('Vennligst fyll ut alle feltene.');
+        return;
+    }
 
     createUserWithEmailAndPassword(auth, emailInput, passwordInput)
         .then((userCredential) => {

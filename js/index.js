@@ -5,7 +5,6 @@ import { auth } from './firebase.js';
 import { onAuthStateChanged } from 'firebase/auth';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const user = JSON.parse(localStorage.getItem('user'));
 
     onAuthStateChanged(auth, (firebaseUser) => {
         if (firebaseUser) {

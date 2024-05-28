@@ -1,4 +1,3 @@
-import firebase from './firebase'; 
 import { firestore, storage} from './firebase';
 import { renderMainMenuForm } from './mainMenu';
 
@@ -99,9 +98,11 @@ export function renderCafees() {
 
 	function displaycafees(cafees, images) {
 		cafeesContainer.innerHTML = ''; 
+		let anyMatch = false;
 	
 		cafees.forEach((cafe,index) => {
 			if (isCafeMatchingFilters(cafe)) {
+				anyMatch = true
 				const cafeDiv = document.createElement('div');
 				const cafeModal = document.createElement('div');
 				cafeDiv.className = 'option-box'; 
@@ -118,7 +119,6 @@ export function renderCafees() {
 							<div class="title-location-container">
 								<h2>${cafe.name}</h2>
 								<div class="location-with-icon">
-									<i class="fa-solid fa-map-location-dot"></i>
 									<p class="location">${cafe.location}</p>
 								</div>
 							</div>
@@ -170,6 +170,10 @@ export function renderCafees() {
 				});
 			};
 		});
+
+		if (anyMatch==false){
+			cafeesContainer.innerHTML = '<p>Fant ingen treff...</p>'
+		};
 
 		const starContainers = document.querySelectorAll('.rating-container');
     	starContainers.forEach(starContainer => {
@@ -227,7 +231,7 @@ export function renderCafees() {
 	
 			console.log('Rating updated successfully for cafe!');
 			if (ratingContainer) {
-				ratingContainer.innerHTML = 'Thank you for your vote!';
+				ratingContainer.innerHTML = 'Takk for din vurdering!';
 			}
 		} catch (error) {
 			console.error('Error updating rating:', error);
@@ -293,8 +297,8 @@ export function renderCafees() {
 	function renderNewCommentInput(cafeName) {
 		return `
 			<div class="new-comment">
-				<input type="text" id='comment-${cafeName}' placeholder="Write a comment...">
-				<button id="add-comment-button">Add Comment</button>
+				<input type="text" id='comment-${cafeName}' placeholder="Skriv en kommentar...">
+				<button id="add-comment-button">Legg til kommentar</button>
 			</div>
 		`;
 	}

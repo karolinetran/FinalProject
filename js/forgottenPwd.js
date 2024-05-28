@@ -1,7 +1,7 @@
 // forgottenPwd.js
 import '../css/forgottenPwd.css';
 
-import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { sendPasswordResetEmail } from 'firebase/auth';
 import { renderLoginForm } from './loginForm.js';
 import { auth } from './firebase.js';
 

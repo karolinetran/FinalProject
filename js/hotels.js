@@ -1,4 +1,3 @@
-import firebase from './firebase'; 
 import { firestore, storage} from './firebase';
 import { renderMainMenuForm } from './mainMenu';
 
@@ -91,9 +90,11 @@ export function renderHotels() {
 
 	function displayHotels(hotels, images) {
 		hotelsContainer.innerHTML = ''; 
-	
+		let anyMatch = false;
+
 		hotels.forEach((hotel,index) => {
 			if (isHotelMatchingFilters(hotel)) {
+				anyMatch = true;
 				const hotelDiv = document.createElement('div');
 				const hotelModal = document.createElement('div');
 				hotelDiv.className = 'option-box'; 
@@ -110,7 +111,6 @@ export function renderHotels() {
 							<div class="title-location-container">
 								<h2>${hotel.name}</h2>
 								<div class="location-with-icon">
-									<i class="fa-solid fa-map-location-dot"></i>
 									<p class="location">${hotel.location}</p>
 								</div>
 							</div>
@@ -159,6 +159,10 @@ export function renderHotels() {
 				});
 			};
 		});
+
+		if (anyMatch==false){
+			hotelsContainer.innerHTML = '<p>Fant ingen treff...</p>'
+		};
 
 		const starContainers = document.querySelectorAll('.rating-container');
     	starContainers.forEach(starContainer => {
@@ -216,7 +220,7 @@ export function renderHotels() {
 	
 			console.log('Rating updated successfully for hotel!');
 			if (ratingContainer) {
-				ratingContainer.innerHTML = 'Thank you for your vote!';
+				ratingContainer.innerHTML = 'Takk for din vurdering!';
 			}
 		} catch (error) {
 			console.error('Error updating rating:', error);
@@ -284,8 +288,8 @@ export function renderHotels() {
 	function renderNewCommentInput(hotelName) {
 		return `
 			<div class="new-comment">
-				<input type="text" id="comment-${hotelName}" placeholder="Write a comment...">
-				<button id="add-comment-button">Add Comment</button>
+				<input type="text" id="comment-${hotelName}" placeholder="Skriv en kommentar...">
+				<button id="add-comment-button">Legg til kommentar</button>
 			</div>
 		`;
 	}
