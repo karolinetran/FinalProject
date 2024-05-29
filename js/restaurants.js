@@ -3,9 +3,12 @@ import { renderMainMenuForm } from './mainMenu';
 
 import startImg from '../assets/imgs/star.png'
 
+// Function to render the restaurants page
 export function renderRestaurants() {
+	// Getting the main app container element
     const appDiv = document.getElementById('app');
 
+	// Generate HTML for the restaurants page
     const restaurantsHTML = `
 		<div>
 			<div class="home-btn"> <!--Home button to index.html-->
@@ -93,24 +96,36 @@ export function renderRestaurants() {
 		</div>
     `;
 
+	// Render crestaurants html
     appDiv.innerHTML = restaurantsHTML;
+
+	// Get restaurants container element
 	const restaurantsContainer = document.getElementById('restaurants-container');
 
+	// Function to display restaurants based on filters
 	function displayRestaurants(restaurants, images) {
+		// Clearing restaurants container
 		restaurantsContainer.innerHTML = ''; 
+
+		// initialize variable for any filter matches
 		let anyMatch = false;
+
+		// Looping through restaurants
 		restaurants.forEach((restaurant,index) => {
 			if (isRestaurantMatchingFilters(restaurant)) {
 				anyMatch = true;
+				// Creating elements for each restaurant passing the filter
 				const restaurantDiv = document.createElement('div');
 				const restaurantModal = document.createElement('div');
 				restaurantDiv.className = 'option-box'; 
 				restaurantModal.className = "info-modal";
 				restaurantModal.id = `${restaurant.name}`;
 
+				// Setting up restaurant information
 				const imageSrc = images[index];
 				const averageRating = calculateAverageRating(restaurant.rating);
 		
+				// Filling restaurant div with data
 				restaurantDiv.innerHTML = `
 					<a href="#${restaurant.name}">
 						<img src=${imageSrc} class="option-box-img">
@@ -130,6 +145,7 @@ export function renderRestaurants() {
 					</a>
 				`;
 
+				// Filling restaurant modal with data
 				restaurantModal.innerHTML = `
 					<a class="close-modal" href="#"></a>
 					<div>
@@ -153,9 +169,11 @@ export function renderRestaurants() {
 					</div>
 				`;
 		
+				// Appending restaurant div and modal to container
 				restaurantsContainer.appendChild(restaurantDiv);
 				restaurantsContainer.appendChild(restaurantModal);
 
+				// Adding event listeners for comments and ratings
 				const addCommentButton = restaurantModal.querySelector('#add-comment-button');
 				addCommentButton.addEventListener('click', () => {
 					addNewComment(restaurant.id);
@@ -171,16 +189,19 @@ export function renderRestaurants() {
 			};
 		});
 
+		// Displaying message if no crestaurants match filters
 		if (anyMatch==false){
 			restaurantsContainer.innerHTML = '<p>Fant ingen treff...</p>'
 		};
 
+		// Adding event listeners for star ratings
 		const starContainers = document.querySelectorAll('.rating-container');
     	starContainers.forEach(starContainer => {
 			starContainer.addEventListener('mouseover', (event) => {
 				const targetStar = event.target;
 				const starIndex = Array.from(targetStar.parentElement.children).indexOf(targetStar);
 
+				// Highlighting stars on mouseover
 				for (let i = 0; i <= starIndex; i++) {
 					targetStar.parentElement.children[i].style.opacity = 1;
 				}
@@ -188,6 +209,7 @@ export function renderRestaurants() {
 
 			starContainer.addEventListener('mouseout', () => {
 				const stars = starContainer.querySelectorAll('.star-img-user');
+				// Resetting star opacity on mouseout
 				stars.forEach(star => {
 					star.style.opacity = 0.4;
 				});
@@ -196,6 +218,7 @@ export function renderRestaurants() {
 	}
 
 	/* RATING */ 
+	// Function to generate star images for user ratings
 	function generateStarImages() {
         let starImagesHTML = '';
         for (let i = 0; i < 5; i++) {
@@ -204,6 +227,7 @@ export function renderRestaurants() {
         return starImagesHTML;
     }
 
+	// Function to update restaurant rating in Firestore
 	async function updateRating(restaurantId, rating, ratingContainer) {
 		try {
 			const user = JSON.parse(localStorage.getItem('user'));
@@ -239,8 +263,7 @@ export function renderRestaurants() {
 		}
 	}
 	
-	
-
+	// Function to calculate average rating
 	function calculateAverageRating(ratings) {
 		if (ratings.length === 0) return "-"; 
 		const totalRating = ratings.reduce((acc, rating) => acc + rating, 0);
@@ -249,6 +272,7 @@ export function renderRestaurants() {
 	}
 
 	/* COMMENTS */
+	// Function to render comments
 	function renderComments(commentsArray) {
 		let html = ''; 
 	
@@ -261,6 +285,7 @@ export function renderRestaurants() {
 		return html; 
 	}
 
+	// Function to add a new comment
 	function addNewComment(restaurantName) {
 		const user = JSON.parse(localStorage.getItem('user'));
 		let username = ''; 
@@ -299,6 +324,7 @@ export function renderRestaurants() {
 		}
 	}
 	
+	// Function to render input for a new comment
 	function renderNewCommentInput(restaurantName) {
 		return `
 			<div class="new-comment">
@@ -309,6 +335,7 @@ export function renderRestaurants() {
 	}
 
 	/* FILTER */
+	// Function to check if a restaurant matches the applied filters
 	function isRestaurantMatchingFilters(restaurant) {
 		const locationCheckboxes = document.querySelectorAll('.filter-checkbox');
 		const inneserveringCheckbox = document.getElementById('inneservering');
@@ -331,6 +358,7 @@ export function renderRestaurants() {
 		const inneserveringMatch = !inneserveringCheckbox || !inneserveringCheckbox.checked || restaurant.inneservering;
 		const uteserveringMatch = !uteserveringCheckbox || !uteserveringCheckbox.checked || restaurant.uteservering;
 	
+		// If no location is checked filter only on inneservering and uteservering
 		if (!locationChecked) {
 			return inneserveringMatch && uteserveringMatch;
 		}
@@ -338,7 +366,9 @@ export function renderRestaurants() {
 		return locationMatch && inneserveringMatch && uteserveringMatch;
 	}
 
-	/* FETCH FIREBASE */
+	/* FIREBASE */
+
+	// Function to fetch images from firebase
 	function fetchImages(restaurantNames) {
 		return Promise.all(restaurantNames.map(restaurantName => {
 			const imageRef = storage.ref(`restaurants/${restaurantName}/1.jpeg`);
@@ -346,20 +376,26 @@ export function renderRestaurants() {
 		}));
 	}
 
+	// Retrieving restaurant data from Firestore and rendering restaurants
     firestore.collection('restaurants').get()
 		.then(snapshot => {
 			const restaurants = [];
 
+			// Iterating through snapshot to get restaurant data
 			snapshot.forEach(doc => {
 				restaurants.push(doc.data());
 			});
 
+			// Extracting restaurant names
 			const restaurantNames = restaurants.map(restaurant => restaurant.name);
+			// Fetching images for restaurants
 			return fetchImages(restaurantNames)
 				.then(images => ({ restaurants, images })); 
 		})
 		.then(({ restaurants, images }) => {
+			// Displaying restaurants with fetched images
 			displayRestaurants(restaurants, images); 
+			// Adding event listeners to filter checkboxes
 			const filterCheckboxes = document.querySelectorAll('.filter-checkbox, .filter-checkbox-inout');
 			filterCheckboxes.forEach(checkbox => {
 				checkbox.addEventListener('change', () => {
@@ -371,11 +407,12 @@ export function renderRestaurants() {
 			console.error('Error fetching restaurants:', error);
 		});
 	
-
+	// Event listener for back button
 	const backBtn = document.getElementById('back-btn-menu');
     backBtn.addEventListener('click', backBtnClick);
 }
 
+// Function to handle back button click
 function backBtnClick(event) {
     event.preventDefault(); 
     renderMainMenuForm();

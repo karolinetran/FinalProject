@@ -1,4 +1,6 @@
 // firebase.js
+
+// Importing necessary Firebase modules
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth'; 
 import 'firebase/compat/firestore';
@@ -15,9 +17,10 @@ const firebaseConfig = {
 	measurementId: "G-G0DRWGVJJQ"
   };
 
-
+// Initialize Firebase with the provided configuration
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
+// Exporting Firebase authentication, Firestore, and Storage instances
 export const auth = firebaseApp.auth();
 
 export const firestore = firebase.firestore();

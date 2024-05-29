@@ -3,9 +3,12 @@ import { renderMainMenuForm } from './mainMenu';
 
 import startImg from '../assets/imgs/star.png'
 
+// Function to render the cafees page
 export function renderCafees() {
+	// Getting the main app container element
     const appDiv = document.getElementById('app');
 
+	// Generate HTML for the cafees page
     const cafeesHTML = `
 		<div>
 			<div class="home-btn"> <!--Home button to index.html-->
@@ -93,25 +96,36 @@ export function renderCafees() {
 		</div>
     `;
 
+	// Render cafees html
     appDiv.innerHTML = cafeesHTML;
+
+	// Get cafees container element
 	const cafeesContainer = document.getElementById('cafees-container');
 
+	// Function to display cafees based on filters
 	function displaycafees(cafees, images) {
+		// Clearing cafees container
 		cafeesContainer.innerHTML = ''; 
+
+		// initialize variable for any filter matches
 		let anyMatch = false;
 	
+		// Looping through cafees
 		cafees.forEach((cafe,index) => {
 			if (isCafeMatchingFilters(cafe)) {
-				anyMatch = true
+				anyMatch = true;
+				// Creating elements for each cafe passing the filter
 				const cafeDiv = document.createElement('div');
 				const cafeModal = document.createElement('div');
 				cafeDiv.className = 'option-box'; 
 				cafeModal.className = "info-modal";
 				cafeModal.id = `${cafe.name}`;
 
+				// Setting up cafe information
 				const imageSrc = images[index];
 				const averageRating = calculateAverageRating(cafe.rating);
 		
+				// Filling cafe div with data
 				cafeDiv.innerHTML = `
 					<a href="#${cafe.name}">
 						<img src=${imageSrc} class="option-box-img">
@@ -130,6 +144,8 @@ export function renderCafees() {
 						</div>
 					</a>
 				`;
+
+				// Filling cafe modal with data
 				cafeModal.innerHTML = `
 					<a class="close-modal" href="#"></a>
 					<div>
@@ -153,9 +169,11 @@ export function renderCafees() {
 					</div>
 				`;
 		
+				// Appending cafe div and modal to container
 				cafeesContainer.appendChild(cafeDiv);
 				cafeesContainer.appendChild(cafeModal);
 
+				// Adding event listeners for comments and ratings
 				const addCommentButton = cafeModal.querySelector('#add-comment-button');
 				addCommentButton.addEventListener('click', () => {
 					addNewComment(cafe.id);
@@ -171,16 +189,19 @@ export function renderCafees() {
 			};
 		});
 
+		// Displaying message if no cafes match filters
 		if (anyMatch==false){
 			cafeesContainer.innerHTML = '<p>Fant ingen treff...</p>'
 		};
 
+		// Adding event listeners for star ratings
 		const starContainers = document.querySelectorAll('.rating-container');
     	starContainers.forEach(starContainer => {
 			starContainer.addEventListener('mouseover', (event) => {
 				const targetStar = event.target;
 				const starIndex = Array.from(targetStar.parentElement.children).indexOf(targetStar);
 
+				// Highlighting stars on mouseover
 				for (let i = 0; i <= starIndex; i++) {
 					targetStar.parentElement.children[i].style.opacity = 1;
 				}
@@ -188,6 +209,7 @@ export function renderCafees() {
 
 			starContainer.addEventListener('mouseout', () => {
 				const stars = starContainer.querySelectorAll('.star-img-user');
+				// Resetting star opacity on mouseout
 				stars.forEach(star => {
 					star.style.opacity = 0.4;
 				});
@@ -196,6 +218,7 @@ export function renderCafees() {
 	}
 
 	/* RATING */ 
+	// Function to generate star images for user ratings
 	function generateStarImages() {
         let starImagesHTML = '';
         for (let i = 0; i < 5; i++) {
@@ -204,6 +227,7 @@ export function renderCafees() {
         return starImagesHTML;
     }
 
+	// Function to update cafe rating in Firestore
 	async function updateRating(cafeId, rating, ratingContainer) {
 		try {
 			const user = JSON.parse(localStorage.getItem('user'));
@@ -238,6 +262,7 @@ export function renderCafees() {
 		}
 	}
 
+	// Function to calculate average rating
 	function calculateAverageRating(ratings) {
 		if (ratings.length === 0) return "-"; 
 		const totalRating = ratings.reduce((acc, rating) => acc + rating, 0);
@@ -246,6 +271,7 @@ export function renderCafees() {
 	}
 
 	/* COMMENTS */
+	// Function to render comments
 	function renderComments(commentsArray) {
 		let html = ''; 
 	
@@ -257,6 +283,7 @@ export function renderCafees() {
 		return html; 
 	}
 
+	// Function to add a new comment
 	function addNewComment(cafeName) {
 		const user = JSON.parse(localStorage.getItem('user'));
 		let username = ''; 
@@ -293,7 +320,8 @@ export function renderCafees() {
 			}
 		}
 	}
-	
+
+	// Function to render input for a new comment
 	function renderNewCommentInput(cafeName) {
 		return `
 			<div class="new-comment">
@@ -304,6 +332,7 @@ export function renderCafees() {
 	}
 
 	/* FILTER */
+	// Function to check if a cafe matches the applied filters
 	function isCafeMatchingFilters(cafe) {
 		const locationCheckboxes = document.querySelectorAll('.filter-checkbox');
 		const inneserveringCheckbox = document.getElementById('inneservering');
@@ -326,6 +355,7 @@ export function renderCafees() {
 		const inneserveringMatch = !inneserveringCheckbox || !inneserveringCheckbox.checked || cafe.inneservering;
 		const uteserveringMatch = !uteserveringCheckbox || !uteserveringCheckbox.checked || cafe.uteservering;
 	
+		// If no location is checked filter only on inneservering and uteservering
 		if (!locationChecked) {
 			return inneserveringMatch && uteserveringMatch;
 		}
@@ -333,8 +363,9 @@ export function renderCafees() {
 		return locationMatch && inneserveringMatch && uteserveringMatch;
 	}
 	
+	/* FIREBASE */
 
-	/* FETCH FIREBASE */
+	// Function to fetch images from firebase
 	function fetchImages(cafeNames) {
 		return Promise.all(cafeNames.map(cafeName => {
 			const imageRef = storage.ref(`cafees/${cafeName}/1.jpeg`);
@@ -342,20 +373,26 @@ export function renderCafees() {
 		}));
 	}
 
+	// Retrieving cafe data from Firestore and rendering cafees
     firestore.collection('cafees').get()
 		.then(snapshot => {
 			const cafees = [];
 
+			// Iterating through snapshot to get cafe data
 			snapshot.forEach(doc => {
 				cafees.push(doc.data());
 			});
 
+			// Extracting cafe names
 			const cafeNames = cafees.map(cafe => cafe.name);
+			// Fetching images for cafees
 			return fetchImages(cafeNames)
 				.then(images => ({ cafees, images })); 
 		})
 		.then(({ cafees, images }) => {
+			// Displaying cafees with fetched images
 			displaycafees(cafees, images); 
+			// Adding event listeners to filter checkboxes
 			const filterCheckboxes = document.querySelectorAll('.filter-checkbox, .filter-checkbox-inout');
 			filterCheckboxes.forEach(checkbox => {
 				checkbox.addEventListener('change', () => {
@@ -367,11 +404,12 @@ export function renderCafees() {
 			console.error('Error fetching cafees:', error);
 		});
 	
-
+	// Event listener for back button
 	const backBtn = document.getElementById('back-btn-menu');
     backBtn.addEventListener('click', backBtnClick);
 }
 
+// Function to handle back button click
 function backBtnClick(event) {
     event.preventDefault(); 
     renderMainMenuForm();

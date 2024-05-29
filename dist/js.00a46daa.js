@@ -58438,6 +58438,8 @@ require("firebase/compat/storage");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 // firebase.js
 
+// Importing necessary Firebase modules
+
 var firebaseConfig = {
   apiKey: "AIzaSyAotf9gTe5IkOh34KYn2CIvG4i1nWXJe1M",
   authDomain: "hundioslo.firebaseapp.com",
@@ -58448,7 +58450,11 @@ var firebaseConfig = {
   appId: "1:848384070297:web:ec841205b80d2490cb9e08",
   measurementId: "G-G0DRWGVJJQ"
 };
+
+// Initialize Firebase with the provided configuration
 var firebaseApp = _app.default.initializeApp(firebaseConfig);
+
+// Exporting Firebase authentication, Firestore, and Storage instances
 var auth = exports.auth = firebaseApp.auth();
 var firestore = exports.firestore = _app.default.firestore();
 var storage = exports.storage = firebaseApp.storage();
@@ -59000,29 +59006,48 @@ require("../css/newUser.css");
 var _firebase = require("./firebase");
 var _auth = require("firebase/auth");
 var _loginForm = require("./loginForm.js");
-// newUser.js
+// Importing CSS file for styling the new user form
 
+// Importing Firebase modules
+
+// Function to render the new user form
 function renderNewUserForm() {
+  // Getting the main app container element
   var appDiv = document.getElementById('app');
-  var newUserFormHTML = "\n    <div class=\"new-user-page\">\n\t\t<p id=\"back-btn\">Tilbake</p>\n        <div class=\"new-user-form\">\n            <h2>Ny bruker</h2>\n            <div class=\"input-group\">\n                <label for=\"firstName\">Fornavn:</label>\n                <input type=\"text\" id=\"firstName\" placeholder=\"Jan\">\n            </div>\n            <div class=\"input-group\">\n                <label for=\"lastName\">Etternavn:</label>\n                <input type=\"text\" id=\"lastName\" placeholder=\"Johansen\">\n            </div>\n            <div class=\"input-group\">\n                <label for=\"email\">Email:</label>\n                <input type=\"email\" id=\"email\" placeholder=\"jan.johansen@gmail.com\">\n            </div>\n            <div class=\"input-group\">\n                <label for=\"password\">Passord:</label>\n                <input type=\"password\" id=\"password\" placeholder=\"Fyll ut et passord...\">\n            </div>\n            <button class=\"btn\" id=\"signupBtn\">Lag bruker</button>\n        </div>\n    </div>\n    ";
+
+  // Generating HTML for the new user form
+  var newUserFormHTML = "\n        <div class=\"new-user-page\">\n            <p id=\"back-btn\">Tilbake</p>\n            <div class=\"new-user-form\">\n                <h2>Ny bruker</h2>\n                <div class=\"input-group\">\n                    <label for=\"firstName\">Fornavn:</label>\n                    <input type=\"text\" id=\"firstName\" placeholder=\"Jan\">\n                </div>\n                <div class=\"input-group\">\n                    <label for=\"lastName\">Etternavn:</label>\n                    <input type=\"text\" id=\"lastName\" placeholder=\"Johansen\">\n                </div>\n                <div class=\"input-group\">\n                    <label for=\"email\">Email:</label>\n                    <input type=\"email\" id=\"email\" placeholder=\"jan.johansen@gmail.com\">\n                </div>\n                <div class=\"input-group\">\n                    <label for=\"password\">Passord:</label>\n                    <input type=\"password\" id=\"password\" placeholder=\"Fyll ut et passord...\">\n                </div>\n                <button class=\"btn\" id=\"signupBtn\">Lag bruker</button>\n            </div>\n        </div>\n    ";
+
+  // Rendering the new user form HTML to the app container
   appDiv.innerHTML = newUserFormHTML;
+
+  // Adding event listeners for signup button and back button
   var signupBtn = document.getElementById('signupBtn');
   signupBtn.addEventListener('click', handleSignUp);
   var backBtn = document.getElementById('back-btn');
   backBtn.addEventListener('click', backBtnClick);
 }
+
+// Function to handle user signup process
 function handleSignUp() {
+  // Retrieving input values from the form
   var firstNameInput = document.getElementById('firstName').value;
   var lastNameInput = document.getElementById('lastName').value;
   var emailInput = document.getElementById('email').value;
   var passwordInput = document.getElementById('password').value;
+
+  // Checking if any field is empty, if so alert user
   if (!firstNameInput || !lastNameInput || !emailInput || !passwordInput) {
     alert('Vennligst fyll ut alle feltene.');
     return;
   }
+
+  // Creating user with email and password
   (0, _auth.createUserWithEmailAndPassword)(_firebase.auth, emailInput, passwordInput).then(function (userCredential) {
     var user = userCredential.user;
     console.log('User signed up:', user);
+
+    // Updating user profile with first name and last name
     (0, _auth.updateProfile)(user, {
       displayName: "".concat(firstNameInput, " ").concat(lastNameInput)
     }).then(function () {
@@ -59038,13 +59063,13 @@ function handleSignUp() {
       console.error('Error sending verification email:', error);
     });
   }).catch(function (error) {
-    var errorCode = error.code;
     var errorMessage = error.message;
     console.error('Error signing up:', errorMessage);
-    // Optionally, display error messages to the user
     alert("Det skjedde en feil: ".concat(errorMessage));
   });
 }
+
+// Function to handle back button click
 function backBtnClick(event) {
   event.preventDefault();
   (0, _loginForm.renderLoginForm)();
@@ -59064,29 +59089,44 @@ require("../css/forgottenPwd.css");
 var _auth = require("firebase/auth");
 var _loginForm = require("./loginForm.js");
 var _firebase = require("./firebase.js");
-// forgottenPwd.js
+// Importing CSS styles for forgotten password form
 
+// Importing Firebase modules
+
+// Function to render forgotten password form
 function renderForgottenPwdForm() {
+  // Getting the main app container element
   var appDiv = document.getElementById('app');
+
+  // Generate HTML for forgotten password form
   var forgottenPwdFormHTML = "\n        <div class=\"forgotten-pwd-page\">\n\t\t\t<p id=\"back-btn\">Tilbake</p>\n            <div class=\"forgotten-pwd-form\">\n                <h2>Glemt Passord</h2>\n                <p>Skriv inn eposten din for \xE5 f\xE5 tilsendt tilsendt nytt passord</p>\n                <div class=\"input-group\">\n                    <label for=\"email\">Email:</label>\n                    <input type=\"email\" id=\"email\" placeholder=\"Skriv inn e-mail\">\n                </div>\n                <button class=\"btn\" id=\"resetPwdBtn\">Tilbakestill passord</button>\n            </div>\n        </div>\n    ";
+
+  // Rendering forgotten password form
   appDiv.innerHTML = forgottenPwdFormHTML;
+
+  // Adding event listener to reset password button and back button
   var resetPwdBtn = document.getElementById('resetPwdBtn');
   resetPwdBtn.addEventListener('click', handleResetPassword);
   var backBtn = document.getElementById('back-btn');
   backBtn.addEventListener('click', backBtnClick);
 }
+
+// Function to handle password reset
 function handleResetPassword() {
   var emailInput = document.getElementById('email').value;
+
+  // Sending password reset email
   (0, _auth.sendPasswordResetEmail)(_firebase.auth, emailInput).then(function () {
     console.log('Password reset email sent:', emailInput);
     alert('Tilbakestilling av passord er sendt til e-posten.');
   }).catch(function (error) {
-    var errorCode = error.code;
     var errorMessage = error.message;
     console.error('Error sending password reset email:', errorMessage);
     alert("Det skjedde en feil: ".concat(errorMessage));
   });
 }
+
+// Function to handle back button click
 function backBtnClick(event) {
   event.preventDefault();
   (0, _loginForm.renderLoginForm)();
@@ -59125,28 +59165,54 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+// Function to render the cafees page
 function renderCafees() {
+  // Getting the main app container element
   var appDiv = document.getElementById('app');
+
+  // Generate HTML for the cafees page
   var cafeesHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Servering</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"inneservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"inneservering\">Inneservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"uteservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"uteservering\">Uteservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"cafees-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
+
+  // Render cafees html
   appDiv.innerHTML = cafeesHTML;
+
+  // Get cafees container element
   var cafeesContainer = document.getElementById('cafees-container');
+
+  // Function to display cafees based on filters
   function displaycafees(cafees, images) {
+    // Clearing cafees container
     cafeesContainer.innerHTML = '';
+
+    // initialize variable for any filter matches
     var anyMatch = false;
+
+    // Looping through cafees
     cafees.forEach(function (cafe, index) {
       if (isCafeMatchingFilters(cafe)) {
         anyMatch = true;
+        // Creating elements for each cafe passing the filter
         var cafeDiv = document.createElement('div');
         var cafeModal = document.createElement('div');
         cafeDiv.className = 'option-box';
         cafeModal.className = "info-modal";
         cafeModal.id = "".concat(cafe.name);
+
+        // Setting up cafe information
         var imageSrc = images[index];
         var averageRating = calculateAverageRating(cafe.rating);
+
+        // Filling cafe div with data
         cafeDiv.innerHTML = "\n\t\t\t\t\t<a href=\"#".concat(cafe.name, "\">\n\t\t\t\t\t\t<img src=").concat(imageSrc, " class=\"option-box-img\">\n\t\t\t\t\t\t<div class=\"option-box-info-container\">\n\t\t\t\t\t\t\t<div class=\"title-location-container\">\n\t\t\t\t\t\t\t\t<h2>").concat(cafe.name, "</h2>\n\t\t\t\t\t\t\t\t<div class=\"location-with-icon\">\n\t\t\t\t\t\t\t\t\t<p class=\"location\">").concat(cafe.location, "</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t\t<p>").concat(averageRating, "</p>\n\t\t\t\t\t\t\t\t<img src=").concat(_star.default, " class=\"star-img\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<p>").concat(cafe.infoShort, "</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</a>\n\t\t\t\t");
+
+        // Filling cafe modal with data
         cafeModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(cafe.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(cafe.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(cafe.link, ">").concat(cafe.link, "</a>\n\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t").concat(cafe.inneservering ? '<span class="info-tag">Inneservering</span>' : '', "\n\t\t\t\t\t\t\t\t").concat(cafe.uteservering ? '<span class="info-tag">Uteservering</span>' : '', "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t\t").concat(renderComments(cafe.comments), "\n\t\t\t\t\t\t\t\t").concat(renderNewCommentInput(cafe.id), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
+
+        // Appending cafe div and modal to container
         cafeesContainer.appendChild(cafeDiv);
         cafeesContainer.appendChild(cafeModal);
+
+        // Adding event listeners for comments and ratings
         var addCommentButton = cafeModal.querySelector('#add-comment-button');
         addCommentButton.addEventListener('click', function () {
           addNewComment(cafe.id);
@@ -59161,21 +59227,28 @@ function renderCafees() {
       }
       ;
     });
+
+    // Displaying message if no cafes match filters
     if (anyMatch == false) {
       cafeesContainer.innerHTML = '<p>Fant ingen treff...</p>';
     }
     ;
+
+    // Adding event listeners for star ratings
     var starContainers = document.querySelectorAll('.rating-container');
     starContainers.forEach(function (starContainer) {
       starContainer.addEventListener('mouseover', function (event) {
         var targetStar = event.target;
         var starIndex = Array.from(targetStar.parentElement.children).indexOf(targetStar);
+
+        // Highlighting stars on mouseover
         for (var i = 0; i <= starIndex; i++) {
           targetStar.parentElement.children[i].style.opacity = 1;
         }
       });
       starContainer.addEventListener('mouseout', function () {
         var stars = starContainer.querySelectorAll('.star-img-user');
+        // Resetting star opacity on mouseout
         stars.forEach(function (star) {
           star.style.opacity = 0.4;
         });
@@ -59184,6 +59257,7 @@ function renderCafees() {
   }
 
   /* RATING */
+  // Function to generate star images for user ratings
   function generateStarImages() {
     var starImagesHTML = '';
     for (var i = 0; i < 5; i++) {
@@ -59191,9 +59265,11 @@ function renderCafees() {
     }
     return starImagesHTML;
   }
+
+  // Function to update cafe rating in Firestore
   function updateRating(_x, _x2, _x3) {
     return _updateRating.apply(this, arguments);
-  }
+  } // Function to calculate average rating
   function _updateRating() {
     _updateRating = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(cafeId, rating, ratingContainer) {
       var user, userId, cafeRef, cafeDoc, cafeRating;
@@ -59257,6 +59333,7 @@ function renderCafees() {
   }
 
   /* COMMENTS */
+  // Function to render comments
   function renderComments(commentsArray) {
     var html = '';
     for (var i = 0; i < commentsArray.length; i += 2) {
@@ -59268,6 +59345,8 @@ function renderCafees() {
     }
     return html;
   }
+
+  // Function to add a new comment
   function addNewComment(cafeName) {
     var user = JSON.parse(localStorage.getItem('user'));
     var username = '';
@@ -59299,11 +59378,14 @@ function renderCafees() {
       }
     }
   }
+
+  // Function to render input for a new comment
   function renderNewCommentInput(cafeName) {
     return "\n\t\t\t<div class=\"new-comment\">\n\t\t\t\t<input type=\"text\" id='comment-".concat(cafeName, "' placeholder=\"Skriv en kommentar...\">\n\t\t\t\t<button id=\"add-comment-button\">Legg til kommentar</button>\n\t\t\t</div>\n\t\t");
   }
 
   /* FILTER */
+  // Function to check if a cafe matches the applied filters
   function isCafeMatchingFilters(cafe) {
     var locationCheckboxes = document.querySelectorAll('.filter-checkbox');
     var inneserveringCheckbox = document.getElementById('inneservering');
@@ -59330,27 +59412,38 @@ function renderCafees() {
     }
     var inneserveringMatch = !inneserveringCheckbox || !inneserveringCheckbox.checked || cafe.inneservering;
     var uteserveringMatch = !uteserveringCheckbox || !uteserveringCheckbox.checked || cafe.uteservering;
+
+    // If no location is checked filter only on inneservering and uteservering
     if (!locationChecked) {
       return inneserveringMatch && uteserveringMatch;
     }
     return locationMatch && inneserveringMatch && uteserveringMatch;
   }
 
-  /* FETCH FIREBASE */
+  /* FIREBASE */
+
+  // Function to fetch images from firebase
   function fetchImages(cafeNames) {
     return Promise.all(cafeNames.map(function (cafeName) {
       var imageRef = _firebase.storage.ref("cafees/".concat(cafeName, "/1.jpeg"));
       return imageRef.getDownloadURL();
     }));
   }
+
+  // Retrieving cafe data from Firestore and rendering cafees
   _firebase.firestore.collection('cafees').get().then(function (snapshot) {
     var cafees = [];
+
+    // Iterating through snapshot to get cafe data
     snapshot.forEach(function (doc) {
       cafees.push(doc.data());
     });
+
+    // Extracting cafe names
     var cafeNames = cafees.map(function (cafe) {
       return cafe.name;
     });
+    // Fetching images for cafees
     return fetchImages(cafeNames).then(function (images) {
       return {
         cafees: cafees,
@@ -59360,7 +59453,9 @@ function renderCafees() {
   }).then(function (_ref) {
     var cafees = _ref.cafees,
       images = _ref.images;
+    // Displaying cafees with fetched images
     displaycafees(cafees, images);
+    // Adding event listeners to filter checkboxes
     var filterCheckboxes = document.querySelectorAll('.filter-checkbox, .filter-checkbox-inout');
     filterCheckboxes.forEach(function (checkbox) {
       checkbox.addEventListener('change', function () {
@@ -59370,9 +59465,13 @@ function renderCafees() {
   }).catch(function (error) {
     console.error('Error fetching cafees:', error);
   });
+
+  // Event listener for back button
   var backBtn = document.getElementById('back-btn-menu');
   backBtn.addEventListener('click', backBtnClick);
 }
+
+// Function to handle back button click
 function backBtnClick(event) {
   event.preventDefault();
   (0, _mainMenu.renderMainMenuForm)();
@@ -59403,28 +59502,54 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+// Function to render the hotels page
 function renderHotels() {
+  // Getting the main app container element
   var appDiv = document.getElementById('app');
+
+  // Generate HTML for the hotels page
   var hotelsHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"hotels-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
+
+  // Render hotels html
   appDiv.innerHTML = hotelsHTML;
+
+  // Get hotels container element
   var hotelsContainer = document.getElementById('hotels-container');
+
+  // Function to display hotels based on filters
   function displayHotels(hotels, images) {
+    // Clearing hotels container
     hotelsContainer.innerHTML = '';
+
+    // initialize variable for any filter matches
     var anyMatch = false;
+
+    // Looping through hotels
     hotels.forEach(function (hotel, index) {
       if (isHotelMatchingFilters(hotel)) {
         anyMatch = true;
+        // Creating elements for each hotel passing the filter
         var hotelDiv = document.createElement('div');
         var hotelModal = document.createElement('div');
         hotelDiv.className = 'option-box';
         hotelModal.className = "info-modal";
         hotelModal.id = "".concat(hotel.name);
+
+        // Setting up hotels information
         var imageSrc = images[index];
         var averageRating = calculateAverageRating(hotel.rating);
+
+        // Filling hotels div with data
         hotelDiv.innerHTML = "\n\t\t\t\t\t<a href=\"#".concat(hotel.name, "\">\n\t\t\t\t\t\t<img src=").concat(imageSrc, " class=\"option-box-img\">\n\t\t\t\t\t\t<div class=\"option-box-info-container\">\n\t\t\t\t\t\t\t<div class=\"title-location-container\">\n\t\t\t\t\t\t\t\t<h2>").concat(hotel.name, "</h2>\n\t\t\t\t\t\t\t\t<div class=\"location-with-icon\">\n\t\t\t\t\t\t\t\t\t<p class=\"location\">").concat(hotel.location, "</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t\t<p>").concat(averageRating, "</p>\n\t\t\t\t\t\t\t\t<img src=").concat(_star.default, " class=\"star-img\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<p>").concat(hotel.infoShort, "</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</a>\n\t\t\t\t");
+
+        // Filling hotels modal with data
         hotelModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(hotel.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(hotel.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(hotel.link, ">").concat(hotel.link, "</a>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t").concat(renderComments(hotel.comments), "\n\t\t\t\t\t\t\t").concat(renderNewCommentInput(hotel.id), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
+
+        // Appending hotels div and modal to container
         hotelsContainer.appendChild(hotelDiv);
         hotelsContainer.appendChild(hotelModal);
+
+        // Adding event listeners for comments and ratings
         var addCommentButton = hotelModal.querySelector('#add-comment-button');
         addCommentButton.addEventListener('click', function () {
           addNewComment(hotel.id);
@@ -59439,21 +59564,28 @@ function renderHotels() {
       }
       ;
     });
+
+    // Displaying message if no hotels match filters
     if (anyMatch == false) {
       hotelsContainer.innerHTML = '<p>Fant ingen treff...</p>';
     }
     ;
+
+    // Adding event listeners for star ratings
     var starContainers = document.querySelectorAll('.rating-container');
     starContainers.forEach(function (starContainer) {
       starContainer.addEventListener('mouseover', function (event) {
         var targetStar = event.target;
         var starIndex = Array.from(targetStar.parentElement.children).indexOf(targetStar);
+
+        // Highlighting stars on mouseover
         for (var i = 0; i <= starIndex; i++) {
           targetStar.parentElement.children[i].style.opacity = 1;
         }
       });
       starContainer.addEventListener('mouseout', function () {
         var stars = starContainer.querySelectorAll('.star-img-user');
+        // Resetting star opacity on mouseout
         stars.forEach(function (star) {
           star.style.opacity = 0.4;
         });
@@ -59462,6 +59594,7 @@ function renderHotels() {
   }
 
   /* RATING */
+  // Function to generate star images for user ratings
   function generateStarImages() {
     var starImagesHTML = '';
     for (var i = 0; i < 5; i++) {
@@ -59469,9 +59602,11 @@ function renderHotels() {
     }
     return starImagesHTML;
   }
+
+  // Function to update hotels rating in Firestore
   function updateRating(_x, _x2, _x3) {
     return _updateRating.apply(this, arguments);
-  }
+  } // Function to calculate average rating
   function _updateRating() {
     _updateRating = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(hotelId, rating, ratingContainer) {
       var user, userId, hotelRef, hotelDoc, hotelRating;
@@ -59535,6 +59670,7 @@ function renderHotels() {
   }
 
   /* COMMENTS */
+  // Function to render comments
   function renderComments(commentsArray) {
     var html = '';
     for (var i = 0; i < commentsArray.length; i += 2) {
@@ -59546,6 +59682,8 @@ function renderHotels() {
     }
     return html;
   }
+
+  // Function to add a new comment
   function addNewComment(hotelName) {
     var user = JSON.parse(localStorage.getItem('user'));
     var username = '';
@@ -59577,11 +59715,14 @@ function renderHotels() {
       }
     }
   }
+
+  // Function to render input for a new comment
   function renderNewCommentInput(hotelName) {
     return "\n\t\t\t<div class=\"new-comment\">\n\t\t\t\t<input type=\"text\" id=\"comment-".concat(hotelName, "\" placeholder=\"Skriv en kommentar...\">\n\t\t\t\t<button id=\"add-comment-button\">Legg til kommentar</button>\n\t\t\t</div>\n\t\t");
   }
 
   /* FILTER */
+  // Function to check if a hotel matches the applied filters
   function isHotelMatchingFilters(hotel) {
     var filterCheckboxes = document.querySelectorAll('.filter-checkbox');
     var anyChecked = false;
@@ -59608,18 +59749,26 @@ function renderHotels() {
     return false;
   }
 
-  /* FETCH FIREBASE */
+  /* FIREBASE */
+
+  // Function to fetch images from firebase
   function fetchImages(hotelNames) {
     return Promise.all(hotelNames.map(function (hotelName) {
       var imageRef = _firebase.storage.ref("hotels/".concat(hotelName, "/1.jpeg"));
       return imageRef.getDownloadURL();
     }));
   }
+
+  // Retrieving hotel data from Firestore and rendering hotels
   _firebase.firestore.collection('hotels').get().then(function (snapshot) {
     var hotels = [];
+
+    // Iterating through snapshot to get hotel data
     snapshot.forEach(function (doc) {
       hotels.push(doc.data());
     });
+
+    // Extracting hotel names
     var hotelNames = hotels.map(function (hotel) {
       return hotel.name;
     });
@@ -59632,7 +59781,9 @@ function renderHotels() {
   }).then(function (_ref) {
     var hotels = _ref.hotels,
       images = _ref.images;
+    // Displaying cafees with fetched images
     displayHotels(hotels, images);
+    // Adding event listeners to filter checkboxes
     var filterCheckboxes = document.querySelectorAll('.filter-checkbox');
     filterCheckboxes.forEach(function (checkbox) {
       checkbox.addEventListener('change', function () {
@@ -59642,9 +59793,13 @@ function renderHotels() {
   }).catch(function (error) {
     console.error('Error fetching hotels:', error);
   });
+
+  // Event listener for back button
   var backBtn = document.getElementById('back-btn-menu');
   backBtn.addEventListener('click', backBtnClick);
 }
+
+// Function to handle back button click
 function backBtnClick(event) {
   event.preventDefault();
   (0, _mainMenu.renderMainMenuForm)();
@@ -59675,28 +59830,54 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+// Function to render the restaurants page
 function renderRestaurants() {
+  // Getting the main app container element
   var appDiv = document.getElementById('app');
+
+  // Generate HTML for the restaurants page
   var restaurantsHTML = "\n\t\t<div>\n\t\t\t<div class=\"home-btn\"> <!--Home button to index.html-->\n\t\t\t\t<p id=\"back-btn-menu\">Tilbake</p>\n\t\t\t</div>\n\t\t\t<div class=\"filter-and-options-container\"> <!--Filter section for service and location-->\n\t\t\t\t<div class=\"filtermenu\">\n\t\t\t\t<p class=\"filter-title\">FILTER S\xD8K</p>\n\t\t\t\t<form id=\"filter\">\n\t\t\t\t\t<p>Servering</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"inneservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"inneservering\">Inneservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox-inout\" id=\"uteservering\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"uteservering\">Uteservering</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<p>Bydel</p>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Alna\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Alna\">Alna</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Bjerke\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Bjerke\">Bjerke</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Frogner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Frogner\">Frogner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gamle Oslo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"GamleOslo\">Gamle Oslo</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Grorud\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Grorud\">Grorud</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Gr\xFCnerl\xF8kka\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Gr\xFCnerl\xF8kka\">Gr\xFCnerl\xF8kka</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"NordreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"NordreAker\">Nordre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Nordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Nordstrand\">Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Sagene\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Sagene\">Sagene</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"StHanshaugen\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"StHanshaugen\">St. Hanshaugen</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Stovner\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Stovner\">Stovner</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"SondreNordstrand\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"SondreNordstrand\">S\xF8ndre Nordstrand</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ullern\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ullern\">Ullern</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"VestreAker\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"VestreAker\">Vestre Aker</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<input class=\"filter-checkbox\" id=\"Ostensjo\" type=\"checkbox\">\n\t\t\t\t\t\t<label for=\"Ostensjo\">\xD8stensj\xF8</label>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"restaurants-container\" class=\"secondary-options-container\"> <!--Container to be filled with filtered results from javascript-->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    ";
+
+  // Render crestaurants html
   appDiv.innerHTML = restaurantsHTML;
+
+  // Get restaurants container element
   var restaurantsContainer = document.getElementById('restaurants-container');
+
+  // Function to display restaurants based on filters
   function displayRestaurants(restaurants, images) {
+    // Clearing restaurants container
     restaurantsContainer.innerHTML = '';
+
+    // initialize variable for any filter matches
     var anyMatch = false;
+
+    // Looping through restaurants
     restaurants.forEach(function (restaurant, index) {
       if (isRestaurantMatchingFilters(restaurant)) {
         anyMatch = true;
+        // Creating elements for each restaurant passing the filter
         var restaurantDiv = document.createElement('div');
         var restaurantModal = document.createElement('div');
         restaurantDiv.className = 'option-box';
         restaurantModal.className = "info-modal";
         restaurantModal.id = "".concat(restaurant.name);
+
+        // Setting up restaurant information
         var imageSrc = images[index];
         var averageRating = calculateAverageRating(restaurant.rating);
+
+        // Filling restaurant div with data
         restaurantDiv.innerHTML = "\n\t\t\t\t\t<a href=\"#".concat(restaurant.name, "\">\n\t\t\t\t\t\t<img src=").concat(imageSrc, " class=\"option-box-img\">\n\t\t\t\t\t\t<div class=\"option-box-info-container\">\n\t\t\t\t\t\t\t<div class=\"title-location-container\">\n\t\t\t\t\t\t\t\t<h2>").concat(restaurant.name, "</h2>\n\t\t\t\t\t\t\t\t<div class=\"location-with-icon\">\n\t\t\t\t\t\t\t\t\t<p class=\"location\">").concat(restaurant.location, "</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t\t<p>").concat(averageRating, "</p>\n\t\t\t\t\t\t\t\t<img src=").concat(_star.default, " class=\"star-img\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<p>").concat(restaurant.infoShort, "</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</a>\n\t\t\t\t");
+
+        // Filling restaurant modal with data
         restaurantModal.innerHTML = "\n\t\t\t\t\t<a class=\"close-modal\" href=\"#\"></a>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"modal-content\">\n\t\t\t\t\t\t\t<img src=".concat(imageSrc, " class=\"modal-img\">\n\t\t\t\t\t\t\t<h2>").concat(restaurant.name, " <span> - ").concat(averageRating, " <img src=").concat(_star.default, " class=\"star-img\"></span></h2>\n\t\t\t\t\t\t\t<p>").concat(restaurant.info, "</p>\n\t\t\t\t\t\t\t<a class=\"modal-link\" href=").concat(restaurant.link, ">").concat(restaurant.link, "</a>\n\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t").concat(restaurant.inneservering ? '<span class="info-tag">Inneservering</span>' : '', "\n\t\t\t\t\t\t\t\t").concat(restaurant.uteservering ? '<span class="info-tag">Uteservering</span>' : '', "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"rating-container\">\n\t\t\t\t\t\t\t").concat(generateStarImages(), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"comments-container\">\n\t\t\t\t\t\t\t").concat(renderComments(restaurant.comments), "\n\t\t\t\t\t\t\t").concat(renderNewCommentInput(restaurant.id), "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t");
+
+        // Appending restaurant div and modal to container
         restaurantsContainer.appendChild(restaurantDiv);
         restaurantsContainer.appendChild(restaurantModal);
+
+        // Adding event listeners for comments and ratings
         var addCommentButton = restaurantModal.querySelector('#add-comment-button');
         addCommentButton.addEventListener('click', function () {
           addNewComment(restaurant.id);
@@ -59711,21 +59892,28 @@ function renderRestaurants() {
       }
       ;
     });
+
+    // Displaying message if no crestaurants match filters
     if (anyMatch == false) {
       restaurantsContainer.innerHTML = '<p>Fant ingen treff...</p>';
     }
     ;
+
+    // Adding event listeners for star ratings
     var starContainers = document.querySelectorAll('.rating-container');
     starContainers.forEach(function (starContainer) {
       starContainer.addEventListener('mouseover', function (event) {
         var targetStar = event.target;
         var starIndex = Array.from(targetStar.parentElement.children).indexOf(targetStar);
+
+        // Highlighting stars on mouseover
         for (var i = 0; i <= starIndex; i++) {
           targetStar.parentElement.children[i].style.opacity = 1;
         }
       });
       starContainer.addEventListener('mouseout', function () {
         var stars = starContainer.querySelectorAll('.star-img-user');
+        // Resetting star opacity on mouseout
         stars.forEach(function (star) {
           star.style.opacity = 0.4;
         });
@@ -59734,6 +59922,7 @@ function renderRestaurants() {
   }
 
   /* RATING */
+  // Function to generate star images for user ratings
   function generateStarImages() {
     var starImagesHTML = '';
     for (var i = 0; i < 5; i++) {
@@ -59741,9 +59930,11 @@ function renderRestaurants() {
     }
     return starImagesHTML;
   }
+
+  // Function to update restaurant rating in Firestore
   function updateRating(_x, _x2, _x3) {
     return _updateRating.apply(this, arguments);
-  }
+  } // Function to calculate average rating
   function _updateRating() {
     _updateRating = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(restaurantId, rating, ratingContainer) {
       var user, userId, restaurantRef, restaurantDoc, restaurantRating;
@@ -59808,6 +59999,7 @@ function renderRestaurants() {
   }
 
   /* COMMENTS */
+  // Function to render comments
   function renderComments(commentsArray) {
     var html = '';
     for (var i = 0; i < commentsArray.length; i += 2) {
@@ -59819,6 +60011,8 @@ function renderRestaurants() {
     }
     return html;
   }
+
+  // Function to add a new comment
   function addNewComment(restaurantName) {
     var user = JSON.parse(localStorage.getItem('user'));
     var username = '';
@@ -59850,11 +60044,14 @@ function renderRestaurants() {
       }
     }
   }
+
+  // Function to render input for a new comment
   function renderNewCommentInput(restaurantName) {
     return "\n\t\t\t<div class=\"new-comment\">\n\t\t\t\t<input type=\"text\" id=\"comment-".concat(restaurantName, "\" placeholder=\"Skriv en kommentar...\">\n\t\t\t\t<button id=\"add-comment-button\">Legg til kommentar</button>\n\t\t\t</div>\n\t\t");
   }
 
   /* FILTER */
+  // Function to check if a restaurant matches the applied filters
   function isRestaurantMatchingFilters(restaurant) {
     var locationCheckboxes = document.querySelectorAll('.filter-checkbox');
     var inneserveringCheckbox = document.getElementById('inneservering');
@@ -59881,27 +60078,38 @@ function renderRestaurants() {
     }
     var inneserveringMatch = !inneserveringCheckbox || !inneserveringCheckbox.checked || restaurant.inneservering;
     var uteserveringMatch = !uteserveringCheckbox || !uteserveringCheckbox.checked || restaurant.uteservering;
+
+    // If no location is checked filter only on inneservering and uteservering
     if (!locationChecked) {
       return inneserveringMatch && uteserveringMatch;
     }
     return locationMatch && inneserveringMatch && uteserveringMatch;
   }
 
-  /* FETCH FIREBASE */
+  /* FIREBASE */
+
+  // Function to fetch images from firebase
   function fetchImages(restaurantNames) {
     return Promise.all(restaurantNames.map(function (restaurantName) {
       var imageRef = _firebase.storage.ref("restaurants/".concat(restaurantName, "/1.jpeg"));
       return imageRef.getDownloadURL();
     }));
   }
+
+  // Retrieving restaurant data from Firestore and rendering restaurants
   _firebase.firestore.collection('restaurants').get().then(function (snapshot) {
     var restaurants = [];
+
+    // Iterating through snapshot to get restaurant data
     snapshot.forEach(function (doc) {
       restaurants.push(doc.data());
     });
+
+    // Extracting restaurant names
     var restaurantNames = restaurants.map(function (restaurant) {
       return restaurant.name;
     });
+    // Fetching images for restaurants
     return fetchImages(restaurantNames).then(function (images) {
       return {
         restaurants: restaurants,
@@ -59911,7 +60119,9 @@ function renderRestaurants() {
   }).then(function (_ref) {
     var restaurants = _ref.restaurants,
       images = _ref.images;
+    // Displaying restaurants with fetched images
     displayRestaurants(restaurants, images);
+    // Adding event listeners to filter checkboxes
     var filterCheckboxes = document.querySelectorAll('.filter-checkbox, .filter-checkbox-inout');
     filterCheckboxes.forEach(function (checkbox) {
       checkbox.addEventListener('change', function () {
@@ -59921,9 +60131,13 @@ function renderRestaurants() {
   }).catch(function (error) {
     console.error('Error fetching restaurants:', error);
   });
+
+  // Event listener for back button
   var backBtn = document.getElementById('back-btn-menu');
   backBtn.addEventListener('click', backBtnClick);
 }
+
+// Function to handle back button click
 function backBtnClick(event) {
   event.preventDefault();
   (0, _mainMenu.renderMainMenuForm)();
@@ -59944,14 +60158,26 @@ var _hotels2 = require("./hotels");
 var _restaurants2 = require("./restaurants");
 var _auth = require("firebase/auth");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+// Importing images for different options
+
+// Importing necessary Firebase modules
+
+// Function to render the main menu form
 function renderMainMenuForm() {
+  // Getting the main app container element
   var appDiv = document.getElementById('app');
+
+  // Retrieving user information from localStorage
   var user = JSON.parse(localStorage.getItem('user'));
   var username = '';
   if (user) {
     username = user.displayName || user.email;
   }
-  var mainMenuHTML = "\n    <div>\n        <div class=\"header\"> <!--Header image with text-->\n            <div class=\"header-info\">\n                <p>".concat(username, "</p>\n                <button id=\"logoutBtn\">Logg ut</button>\n            </div>\n            <h1>Hund i Oslo</h1>\n        </div>\n        <div class=\"main-options-container\"> <!--Container for options -->\n            <div class=\"option-box option-box-main\" id=\"restaurantOption\">   <!--Option box with link to restaurants-->\n                <img src=\"").concat(_restaurants.default, "\" class=\"option-box-img\">\n                <h2>Restauranter</h2>\n                <p>Oversikt over restauranter i Oslo hvor du kan ta med din firbente venn!</p>\n            </div>\n            <div class=\"option-box option-box-main\" id=\"cafeOption\"> <!--Option box with link to cafees-->\n                <img src=\"").concat(_cafees.default, "\" class=\"option-box-img\">\n                <h2>Kafeer og barer</h2>\n                <p>Oversikt over kafeer og barer i Oslo hvor du kan ta med din firbente venn!</p>\n            </div>\n            <div class=\"option-box option-box-main\" id=\"hotelOption\"> <!--Option box with link to hotels-->\n                <img src=\"").concat(_hotels.default, "\" class=\"option-box-img\">\n                <h2>Hoteller</h2>\n                <p>Oversikt over hundevennlige hotell i Oslo!</p>\n            </div>\n        </div>\n        <div class=\"footer\"> <!--Footer with additional links(not implemented)-->\n            <div class=\"footer-container\">\n                <a href=\"https://www.mattilsynet.no/mat-og-drikke/matservering/tilgang-kjaeledyr\" class=\"footer-link\">Mattilsynets rettningslinjer</a>\n            </div>\n            <div class=\"footer-container\">\n                <a href=\"mailto: kamatrrrr@gmail.com\" class=\"footer-link\">Kjenner du til nye plasser? <br> Tips oss!</p>\n            </div>\n        </div>\n    </div>\n    ");
+
+  // Generate HTML for the main menu
+  var mainMenuHTML = "\n        <div>\n            <div class=\"header\"> <!--Header image with text-->\n                <div class=\"header-info\">\n                    <p>".concat(username, "</p>\n                    <button id=\"logoutBtn\">Logg ut</button>\n                </div>\n                <h1>Hund i Oslo</h1>\n            </div>\n            <div class=\"main-options-container\"> <!--Container for options -->\n                <div class=\"option-box option-box-main\" id=\"restaurantOption\">   <!--Option box with link to restaurants-->\n                    <img src=\"").concat(_restaurants.default, "\" class=\"option-box-img\">\n                    <h2>Restauranter</h2>\n                    <p>Oversikt over restauranter i Oslo hvor du kan ta med din firbente venn!</p>\n                </div>\n                <div class=\"option-box option-box-main\" id=\"cafeOption\"> <!--Option box with link to cafees-->\n                    <img src=\"").concat(_cafees.default, "\" class=\"option-box-img\">\n                    <h2>Kafeer og barer</h2>\n                    <p>Oversikt over kafeer og barer i Oslo hvor du kan ta med din firbente venn!</p>\n                </div>\n                <div class=\"option-box option-box-main\" id=\"hotelOption\"> <!--Option box with link to hotels-->\n                    <img src=\"").concat(_hotels.default, "\" class=\"option-box-img\">\n                    <h2>Hoteller</h2>\n                    <p>Oversikt over hundevennlige hotell i Oslo!</p>\n                </div>\n            </div>\n            <div class=\"footer\"> <!--Footer with additional links(not implemented)-->\n                <div class=\"footer-container\">\n                    <a href=\"https://www.mattilsynet.no/mat-og-drikke/matservering/tilgang-kjaeledyr\" class=\"footer-link\">Mattilsynets rettningslinjer</a>\n                </div>\n                <div class=\"footer-container\">\n                    <a href=\"mailto: kamatrrrr@gmail.com\" class=\"footer-link\">Kjenner du til nye plasser? <br> Tips oss!</p>\n                </div>\n            </div>\n        </div>\n    ");
+
+  // Rendering the main menu
   appDiv.innerHTML = mainMenuHTML;
 
   // Add event listeners to each option box
@@ -59966,6 +60192,8 @@ function renderMainMenuForm() {
   var logoutBtn = document.getElementById('logoutBtn');
   logoutBtn.addEventListener('click', handleLogout);
 }
+
+// Function to handle logout
 function handleLogout() {
   var auth = (0, _auth.getAuth)();
   (0, _auth.signOut)(auth).then(function () {
@@ -59974,6 +60202,7 @@ function handleLogout() {
   });
 }
 },{"../assets/imgs/restaurants.jpg":"assets/imgs/restaurants.jpg","../assets/imgs/cafees.jpg":"assets/imgs/cafees.jpg","../assets/imgs/hotels.jpg":"assets/imgs/hotels.jpg","./loginForm.js":"js/loginForm.js","./cafees":"js/cafees.js","./hotels":"js/hotels.js","./restaurants":"js/restaurants.js","firebase/auth":"node_modules/firebase/auth/dist/esm/index.esm.js"}],"js/loginForm.js":[function(require,module,exports) {
+var define;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -59988,23 +60217,32 @@ var _mainMenu = require("./mainMenu");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator.return && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, catch: function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; } // Importing CSS file for styling the login form
+// Importing necessary Firebase modules
+// Function to render the login form
 function renderLoginForm() {
   return _renderLoginForm.apply(this, arguments);
-}
+} // Function to handle login process
 function _renderLoginForm() {
   _renderLoginForm = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var appDiv;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          appDiv = document.getElementById('app');
+          // Getting the main app container element
+          appDiv = document.getElementById('app'); // API for fetching a random dog image for background
           fetch('https://dog.ceo/api/breeds/image/random').then(function (response) {
             return response.json();
           }).then(function (data) {
             var imageUrl = data.message;
-            var loginFormHTML = "\n\t\t\t<div class=\"login-page\" style=\"background-image: url(".concat(imageUrl, ")\">\n\t\t\t\t<h1 class=\"login-page-header\">\n\t\t\t\t\tHund i Oslo!\n\t\t\t\t</h1>\n\t\t\t\t<div class=\"login-page-info\">\n\t\t\t\t\t<p>\n\t\t\t\t\t\tHer finner du en oversikt over kafeer, restauranter og hoteller hvor du kan ta med din firbente venn!\n\t\t\t\t\t</p>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"login-container\">\n\t\t\t\t\t<h2>Logg inn</h2>\n\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t<label for=\"email\">E-post:</label>\n\t\t\t\t\t\t<input type=\"text\" id=\"email\" placeholder=\"Skriv inn e-post\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t<label for=\"password\">Password:</label>\n\t\t\t\t\t\t<input type=\"password\" id=\"password\" placeholder=\"Skriv inn password\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<button class=\"btn\" id=\"loginBtn\">Logg inn</button>\n\t\t\t\t\t<p id=\"forgottenPwdLink\">Glemt passord?</p> \n\t\t\t\t\t<p id=\"newUserLink\">Ikke medlem enda?</p> \n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t");
+
+            // Generating HTML for the login form with dynamic image background
+            var loginFormHTML = "\n\t\t\t\t<div class=\"login-page\" style=\"background-image: url(".concat(imageUrl, ")\">\n\t\t\t\t\t<h1 class=\"login-page-header\">\n\t\t\t\t\t\tHund i Oslo!\n\t\t\t\t\t</h1>\n\t\t\t\t\t<div class=\"login-page-info\">\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\tHer finner du en oversikt over kafeer, restauranter og hoteller hvor du kan ta med din firbente venn!\n\t\t\t\t\t\t</p>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"login-container\">\n\t\t\t\t\t\t<h2>Logg inn</h2>\n\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t<label for=\"email\">E-post:</label>\n\t\t\t\t\t\t\t<input type=\"text\" id=\"email\" placeholder=\"Skriv inn e-post\">\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t<label for=\"password\">Password:</label>\n\t\t\t\t\t\t\t<input type=\"password\" id=\"password\" placeholder=\"Skriv inn password\">\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<button class=\"btn\" id=\"loginBtn\">Logg inn</button>\n\t\t\t\t\t\t<p id=\"forgottenPwdLink\">Glemt passord?</p> \n\t\t\t\t\t\t<p id=\"newUserLink\">Ikke medlem enda?</p> \n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t");
+
+            // Rendering the login form HTML to the app container
             appDiv.innerHTML = loginFormHTML;
+
+            // Adding event listeners for login, new user link, and forgotten password link
             var loginBtn = document.getElementById('loginBtn');
             loginBtn.addEventListener('click', handleLogin);
             var newUserLink = document.getElementById('newUserLink');
@@ -60025,25 +60263,35 @@ function _renderLoginForm() {
 function handleLogin() {
   var emailInput = document.getElementById('email').value;
   var passwordInput = document.getElementById('password').value;
+
+  // Signing in with email and password
   _firebase.auth.signInWithEmailAndPassword(emailInput, passwordInput).then(function (userCredential) {
     var user = userCredential.user;
+    // Storing user data in localStorage
     localStorage.setItem('user', JSON.stringify(user));
+    // Rendering the main menu form
     renderMainMenuOnClick();
   }).catch(function (error) {
-    var errorCode = error.code;
     var errorMessage = error.message;
+    // Alerting user for incorrect email or password
     alert('Feil e-post eller passord');
     console.error('Error signing in:', errorMessage);
   });
 }
+
+// Function to render new user form on link click
 function renderNewUserFormOnClick(event) {
   event.preventDefault();
   (0, _newUser.renderNewUserForm)();
 }
+
+// Function to render forgotten password form on link click
 function renderForgottenPwdFormOnClick(event) {
   event.preventDefault();
   (0, _forgottenPwd.renderForgottenPwdForm)();
 }
+
+// Function to render main menu form
 function renderMainMenuOnClick() {
   (0, _mainMenu.renderMainMenuForm)();
 }
@@ -60060,13 +60308,25 @@ Object.defineProperty(exports, "__esModule", {
 exports.renderNotVerified = renderNotVerified;
 require("../css/notVerified.css");
 var _loginForm = require("./loginForm.js");
+// Importing CSS file for styling the not verified page
+
+// Function to render the not verified page
 function renderNotVerified() {
+  // Getting the main app container element
   var appDiv = document.getElementById('app');
+
+  // Generating HTML for the not verified page
   var notVerifiedHTML = "\n\t\t<div class=\"not-verified-container\">\n\t\t\t<div class=\"not-verified-box\">\n\t\t\t\t<h2>Bruker er ikke verifisert</h2>\n\t\t\t\t<p>\n\t\t\t\t\tDu har f\xE5tt tilsendt en e-post for verifisering. \n\t\t\t\t\tVennligst verifiser brukeren og last inn siden p\xE5 nytt. \n\t\t\t\t</p>\n\t\t\t\t<button id=\"logoutBtn\">Logg ut</button>\n\t\t\t</div>\n\t\t</div>\n    ";
+
+  // Rendering the not verified page HTML to the app container
   appDiv.innerHTML = notVerifiedHTML;
+
+  // Adding event listener for logout button
   var logoutBtn = document.getElementById('logoutBtn');
   logoutBtn.addEventListener('click', handleLogout);
 }
+
+// Function to handle logout process
 function handleLogout() {
   // Remove user from localStorage
   localStorage.removeItem('user');
@@ -60082,18 +60342,24 @@ var _mainMenu = require("./mainMenu");
 var _notVerified = require("./notVerified.js");
 var _firebase = require("./firebase.js");
 var _auth = require("firebase/auth");
+// Importing Firebase modules
+
+// Waiting for DOM content to load
 document.addEventListener('DOMContentLoaded', function () {
+  // Listening for authentication state changes
   (0, _auth.onAuthStateChanged)(_firebase.auth, function (firebaseUser) {
     if (firebaseUser) {
       // User is signed in
       if (firebaseUser.emailVerified) {
+        // If user's email is verified, store user data and render main menu
         localStorage.setItem('user', JSON.stringify(firebaseUser));
         (0, _mainMenu.renderMainMenuForm)();
       } else {
+        // If user's email is not verified, render not verified page
         (0, _notVerified.renderNotVerified)();
       }
     } else {
-      // No user is signed in
+      // No user is signed in, render login form
       (0, _loginForm.renderLoginForm)();
     }
   });

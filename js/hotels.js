@@ -3,9 +3,12 @@ import { renderMainMenuForm } from './mainMenu';
 
 import startImg from '../assets/imgs/star.png'
 
+// Function to render the hotels page
 export function renderHotels() {
+	// Getting the main app container element
     const appDiv = document.getElementById('app');
 
+	// Generate HTML for the hotels page
     const hotelsHTML = `
 		<div>
 			<div class="home-btn"> <!--Home button to index.html-->
@@ -84,26 +87,36 @@ export function renderHotels() {
 		</div>
     `;
 
+	// Render hotels html
     appDiv.innerHTML = hotelsHTML;
 
+	// Get hotels container element
 	const hotelsContainer = document.getElementById('hotels-container');
 
+	// Function to display hotels based on filters
 	function displayHotels(hotels, images) {
+		// Clearing hotels container
 		hotelsContainer.innerHTML = ''; 
+
+		// initialize variable for any filter matches
 		let anyMatch = false;
 
+		// Looping through hotels
 		hotels.forEach((hotel,index) => {
 			if (isHotelMatchingFilters(hotel)) {
 				anyMatch = true;
+				// Creating elements for each hotel passing the filter
 				const hotelDiv = document.createElement('div');
 				const hotelModal = document.createElement('div');
 				hotelDiv.className = 'option-box'; 
 				hotelModal.className = "info-modal";
 				hotelModal.id = `${hotel.name}`;
 
+				// Setting up hotels information
 				const imageSrc = images[index];
 				const averageRating = calculateAverageRating(hotel.rating);
 		
+				// Filling hotels div with data
 				hotelDiv.innerHTML = `
 					<a href="#${hotel.name}">
 						<img src=${imageSrc} class="option-box-img">
@@ -123,6 +136,7 @@ export function renderHotels() {
 					</a>
 				`;
 
+				// Filling hotels modal with data
 				hotelModal.innerHTML = `
 					<a class="close-modal" href="#"></a>
 					<div>
@@ -142,9 +156,11 @@ export function renderHotels() {
 					</div>
 				`;
 		
+				// Appending hotels div and modal to container
 				hotelsContainer.appendChild(hotelDiv);
 				hotelsContainer.appendChild(hotelModal);
 
+				// Adding event listeners for comments and ratings
 				const addCommentButton = hotelModal.querySelector('#add-comment-button');
 				addCommentButton.addEventListener('click', () => {
 					addNewComment(hotel.id);
@@ -160,16 +176,19 @@ export function renderHotels() {
 			};
 		});
 
+		// Displaying message if no hotels match filters
 		if (anyMatch==false){
 			hotelsContainer.innerHTML = '<p>Fant ingen treff...</p>'
 		};
 
+		// Adding event listeners for star ratings
 		const starContainers = document.querySelectorAll('.rating-container');
     	starContainers.forEach(starContainer => {
 			starContainer.addEventListener('mouseover', (event) => {
 				const targetStar = event.target;
 				const starIndex = Array.from(targetStar.parentElement.children).indexOf(targetStar);
 
+				// Highlighting stars on mouseover
 				for (let i = 0; i <= starIndex; i++) {
 					targetStar.parentElement.children[i].style.opacity = 1;
 				}
@@ -177,6 +196,7 @@ export function renderHotels() {
 
 			starContainer.addEventListener('mouseout', () => {
 				const stars = starContainer.querySelectorAll('.star-img-user');
+				// Resetting star opacity on mouseout
 				stars.forEach(star => {
 					star.style.opacity = 0.4;
 				});
@@ -185,6 +205,7 @@ export function renderHotels() {
 	}
 
 	/* RATING */ 
+	// Function to generate star images for user ratings
 	function generateStarImages() {
         let starImagesHTML = '';
         for (let i = 0; i < 5; i++) {
@@ -193,6 +214,7 @@ export function renderHotels() {
         return starImagesHTML;
     }
 
+	// Function to update hotels rating in Firestore
 	async function updateRating(hotelId, rating, ratingContainer) {
 		try {
 			const user = JSON.parse(localStorage.getItem('user'));
@@ -227,7 +249,7 @@ export function renderHotels() {
 		}
 	}
 	
-
+	// Function to calculate average rating
 	function calculateAverageRating(ratings) {
 		if (ratings.length === 0) return "-"; 
 		const totalRating = ratings.reduce((acc, rating) => acc + rating, 0);
@@ -236,6 +258,7 @@ export function renderHotels() {
 	}
 
 	/* COMMENTS */
+	// Function to render comments
 	function renderComments(commentsArray) {
 		let html = ''; 
 	
@@ -247,6 +270,7 @@ export function renderHotels() {
 		return html; 
 	}
 
+	// Function to add a new comment
 	function addNewComment(hotelName) {
 		const user = JSON.parse(localStorage.getItem('user'));
 		let username = ''; 
@@ -285,6 +309,7 @@ export function renderHotels() {
 		}
 	}
 	
+	// Function to render input for a new comment
 	function renderNewCommentInput(hotelName) {
 		return `
 			<div class="new-comment">
@@ -295,6 +320,7 @@ export function renderHotels() {
 	}
 
 	/* FILTER */
+	// Function to check if a hotel matches the applied filters
 	function isHotelMatchingFilters(hotel) {
 		const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
 		let anyChecked = false;
@@ -315,7 +341,9 @@ export function renderHotels() {
 		return false;
 	}
 
-	/* FETCH FIREBASE */
+	/* FIREBASE */
+
+	// Function to fetch images from firebase
 	function fetchImages(hotelNames) {
 		return Promise.all(hotelNames.map(hotelName => {
 			const imageRef = storage.ref(`hotels/${hotelName}/1.jpeg`);
@@ -323,20 +351,25 @@ export function renderHotels() {
 		}));
 	}
 
+	// Retrieving hotel data from Firestore and rendering hotels
     firestore.collection('hotels').get()
 		.then(snapshot => {
 			const hotels = [];
 
+			// Iterating through snapshot to get hotel data
 			snapshot.forEach(doc => {
 				hotels.push(doc.data());
 			});
 
+			// Extracting hotel names
 			const hotelNames = hotels.map(hotel => hotel.name);
 			return fetchImages(hotelNames)
 				.then(images => ({ hotels, images })); 
 		})
 		.then(({ hotels, images }) => {
+			// Displaying cafees with fetched images
 			displayHotels(hotels, images); 
+			// Adding event listeners to filter checkboxes
 			const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
 			filterCheckboxes.forEach(checkbox => {
 				checkbox.addEventListener('change', () => {
@@ -348,11 +381,12 @@ export function renderHotels() {
 			console.error('Error fetching hotels:', error);
 		});
 	
-
+	// Event listener for back button
 	const backBtn = document.getElementById('back-btn-menu');
     backBtn.addEventListener('click', backBtnClick);
 }
 
+// Function to handle back button click
 function backBtnClick(event) {
     event.preventDefault(); 
     renderMainMenuForm();
